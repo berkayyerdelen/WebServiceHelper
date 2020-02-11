@@ -7,17 +7,24 @@ using WebServiceHelper.Entities.BaseEntities;
 
 namespace WebServiceHelper.Entities.Domains
 {
-    public class WebServices : FullAuditedEntity<int>
+    public class WebApps : FullAuditedEntity<int>
     {
-        public string WebServiceName { get; set; }
+        public string WebAppUrl{ get; set; }
         public int ProjectId { get; set; }
 
-        public WebServices()
+        public WebApps()
         {
             CreatedDate = DateTime.Now;
         }
         [ForeignKey("ProjectId")]
         public Project Project { get; set; }
-        public virtual ICollection<WebServiceDetails> WebServiceDetails { get; set; }
+        public virtual ICollection<WebAppDetails> WebAppDetails { get; set; }
+        public WebAppType WebAppType { get; set; }
+
+    }
+    public enum WebAppType : byte
+    {
+        WebApi = 1,
+        WebSite = 2
     }
 }

@@ -14,7 +14,7 @@ namespace WebServiceHelper.Entities.BaseEntities
         public T Id { get; set; }
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
-        public DateTime? CreatedDate;
-        public DateTime? _modifiedDate;
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
     }
 }

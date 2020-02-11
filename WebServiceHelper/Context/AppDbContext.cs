@@ -8,16 +8,16 @@ using WebServiceHelper.Entities.Domains;
 
 namespace WebServiceHelper.Context
 {
-    public class AppContext:DbContext, IAppContext
+    public class AppDbContext:DbContext, IAppContext
     {
         
-        public AppContext(DbContextOptions<AppContext> options):base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
         {
 
         }
         public DbSet<Project> Project{ get; set; }
-        public DbSet<WebServices> WebServices{ get; set; }
-        public DbSet<WebServiceDetails> WebServiceDetails { get; set; }
+        public DbSet<WebApps> WebApps{ get; set; }
+        public DbSet<WebAppDetails> WebAppDetails { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {

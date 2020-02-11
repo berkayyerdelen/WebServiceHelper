@@ -16,12 +16,12 @@ namespace WebServiceHelper.Controllers
         private readonly ILogger<HomeController> _logger;
 
         public IRepository<Project> _projectRepository;
-        public IRepository<WebServices> _webserviceRepository;
-        public IRepository<WebServiceDetails> _webservicedetailRepository;
+        public IRepository<WebApps> _webserviceRepository;
+        public IRepository<WebAppDetails> _webservicedetailRepository;
         public HomeController(ILogger<HomeController> logger,
             IRepository<Project> projectRepository,
-            IRepository<WebServices> webserviceRepository,
-            IRepository<WebServiceDetails> webservicedetailRepository)
+            IRepository<WebApps> webserviceRepository,
+            IRepository<WebAppDetails> webservicedetailRepository)
         {
             _projectRepository = projectRepository;
             _webservicedetailRepository = webservicedetailRepository;

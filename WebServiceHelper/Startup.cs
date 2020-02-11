@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebServiceHelper.Context;
 using WebServiceHelper.Services;
-using AppContext = WebServiceHelper.Context.AppContext;
+using AppContext = WebServiceHelper.Context.AppDbContext;
 
 namespace WebServiceHelper
 {
@@ -32,7 +32,7 @@ namespace WebServiceHelper
             services.AddScoped<IAppContext>(s => s.GetService<AppContext>());
            
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddDbContext<WebServiceHelper.Context.AppContext>(options => options.UseSqlServer(configurationSection.Value));
+            services.AddDbContext<WebServiceHelper.Context.AppDbContext>(options => options.UseSqlServer(configurationSection.Value));
            
         }
 

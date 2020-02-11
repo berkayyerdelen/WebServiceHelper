@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebServiceHelper.Migrations
 {
-    public partial class Tables : Migration
+    public partial class tables_creation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,6 +15,8 @@ namespace WebServiceHelper.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedBy = table.Column<string>(nullable: true),
                     ModifiedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
                     ProjectName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -22,21 +25,24 @@ namespace WebServiceHelper.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WebServices",
+                name: "WebApps",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedBy = table.Column<string>(nullable: true),
                     ModifiedBy = table.Column<string>(nullable: true),
-                    WebServiceName = table.Column<string>(nullable: true),
-                    ProjectId = table.Column<int>(nullable: false)
+                    CreatedDate = table.Column<DateTime>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    WebAppUrl = table.Column<string>(nullable: true),
+                    ProjectId = table.Column<int>(nullable: false),
+                    WebAppType = table.Column<byte>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WebServices", x => x.Id);
+                    table.PrimaryKey("PK_WebApps", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WebServices_Project_ProjectId",
+                        name: "FK_WebApps_Project_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Project",
                         principalColumn: "Id",
@@ -44,43 +50,47 @@ namespace WebServiceHelper.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WebServiceDetails",
+                name: "WebAppDetails",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Url = table.Column<string>(nullable: true),
-                    WebServiceId = table.Column<int>(nullable: false)
+                    CreatedBy = table.Column<string>(nullable: true),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    WebAppAltUrl = table.Column<string>(nullable: true),
+                    WebAppId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WebServiceDetails", x => x.Id);
+                    table.PrimaryKey("PK_WebAppDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WebServiceDetails_WebServices_WebServiceId",
-                        column: x => x.WebServiceId,
-                        principalTable: "WebServices",
+                        name: "FK_WebAppDetails_WebApps_WebAppId",
+                        column: x => x.WebAppId,
+                        principalTable: "WebApps",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_WebServiceDetails_WebServiceId",
-                table: "WebServiceDetails",
-                column: "WebServiceId");
+                name: "IX_WebAppDetails_WebAppId",
+                table: "WebAppDetails",
+                column: "WebAppId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WebServices_ProjectId",
-                table: "WebServices",
+                name: "IX_WebApps_ProjectId",
+                table: "WebApps",
                 column: "ProjectId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "WebServiceDetails");
+                name: "WebAppDetails");
 
             migrationBuilder.DropTable(
-                name: "WebServices");
+                name: "WebApps");
 
             migrationBuilder.DropTable(
                 name: "Project");

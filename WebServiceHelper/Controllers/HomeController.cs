@@ -18,7 +18,7 @@ namespace WebServiceHelper.Controllers
         public IRepository<Project> _projectRepository;
         public IRepository<WebServices> _webserviceRepository;
         public IRepository<WebServiceDetails> _webservicedetailRepository;
-        public HomeController(ILogger<HomeController> logger, 
+        public HomeController(ILogger<HomeController> logger,
             IRepository<Project> projectRepository,
             IRepository<WebServices> webserviceRepository,
             IRepository<WebServiceDetails> webservicedetailRepository)
@@ -32,7 +32,7 @@ namespace WebServiceHelper.Controllers
         {
             var a =_projectRepository.GetAll().Result;
             return View(a);
-           
+
         }
 
         public IActionResult Privacy()

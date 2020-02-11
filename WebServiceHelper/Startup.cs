@@ -9,7 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebServiceHelper.Context;
 using WebServiceHelper.Services;
+using AppContext = WebServiceHelper.Context.AppContext;
 
 namespace WebServiceHelper
 {
@@ -27,8 +29,11 @@ namespace WebServiceHelper
         {
             var configurationSection = Configuration.GetSection("ConnectionStrings:DefaultConnection");
             services.AddControllersWithViews();
-            services.AddDbContext<WebServiceHelper.Context.AppContext>(options => options.UseSqlServer(configurationSection.Value));
+            services.AddScoped<IAppContext>(s => s.GetService<AppContext>());
+           
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddDbContext<WebServiceHelper.Context.AppContext>(options => options.UseSqlServer(configurationSection.Value));
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

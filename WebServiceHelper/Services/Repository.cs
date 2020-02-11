@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using WebServiceHelper.Context;
 
@@ -16,7 +17,7 @@ namespace WebServiceHelper.Services
         {
             var entity = await _context.Set<T>().FindAsync(id);
             _context.Set<T>().Remove(entity);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(CancellationToken.None);
         }
 
         public async Task<IList<T>> GetAll()
@@ -32,14 +33,14 @@ namespace WebServiceHelper.Services
         public async Task Insert(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(CancellationToken.None);
         }
 
         public async Task Update(int id, T entity)
         {
             var currentEntity = await _context.Set<T>().FindAsync(id);
             currentEntity = entity;
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(CancellationToken.None);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace WebServiceHelper.Context
 {
     public interface IAppContext
     {
-        DbSet<T> Set<T>() where T : class;
-        Task<int> SaveChangesAsync();
+        DbSet<T> Set<T>() where T : class;      
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

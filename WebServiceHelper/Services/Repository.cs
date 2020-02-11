@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,24 +19,27 @@ namespace WebServiceHelper.Services
             await _context.SaveChangesAsync();
         }
 
-        public Task<IList<T>> GetAll()
+        public async Task<IList<T>> GetAll()
         {
-
+            return await _context.Set<T>().ToListAsync();
         }
 
-        public Task<T> GetById(int id)
+        public async Task<T> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().FindAsync(id);
         }
 
-        public Task Insert(T entity)
+        public async Task Insert(T entity)
         {
-            throw new NotImplementedException();
+            await _context.Set<T>().AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public Task Update(int id, T entity)
+        public async Task Update(int id, T entity)
         {
-            throw new NotImplementedException();
+            var currentEntity = await _context.Set<T>().FindAsync(id);
+            currentEntity = entity;
+            await _context.SaveChangesAsync();
         }
     }
 }

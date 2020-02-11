@@ -42,5 +42,10 @@ namespace WebServiceHelper.Services
             currentEntity = entity;
             await _context.SaveChangesAsync(CancellationToken.None);
         }
+
+        public async Task<IQueryable<T>> GetList()
+        {
+            return await Task.Run(() => _context.Set<T>());
+        }
     }
 }

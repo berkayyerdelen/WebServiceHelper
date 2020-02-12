@@ -35,7 +35,7 @@ namespace WebServiceHelper.Controllers
 
         }
 
-        public IActionResult Privacy()
+        public IActionResult Management()
         {
             return View();
         }

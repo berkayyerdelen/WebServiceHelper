@@ -2,16 +2,30 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<link href="~/swagger/swagger-ui.css" rel="stylesheet" />
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    #bar {
+        border-radius: 40px;
+    }
+
+    hr.green {
+        
+        border: 1px solid groove;
+        border-radius: 5px;
+        margin-top: -5px;
+    }
+</style>
+
+<div class="container p-3 my-3" id="bar">
+    <h3>My First Bootstrap Page</h3>
+    <hr class="green" />
+    <p>This container has a dark background color and a white text, and some extra padding and margins.</p>
 </div>
-
 <div>
     @foreach (var item in Model)
     {
         @item.ProjectName
     }
 </div>
+
+

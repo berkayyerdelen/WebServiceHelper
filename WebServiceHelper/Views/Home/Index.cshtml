@@ -21,11 +21,17 @@
     <hr class="green" />
     <p>This container has a dark background color and a white text, and some extra padding and margins.</p>
     <div>
-        @foreach (var item in Model)
+        @foreach (var project in Model)
         {
-            @item.ProjectName
-            @*@item.WebServices.Select(x => x.WebAppUrl);
-            @item.WebServices.Select(x => x.WebAppDetails.Select(p => p.WebAppAltUrl));*@
+            @project.ProjectName<br />
+            foreach (var webapp in project.WebServices)
+            {
+                @webapp.WebAppUrl<br />
+                foreach (var item in webapp.WebAppDetails)
+                {
+                    @item.WebAppAltUrl
+                }
+            }
         }
     </div>
 </div>

@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModel\" />
     <Folder Include="wwwroot\bootstrap\" />
     <Folder Include="wwwroot\swagger\" />
   </ItemGroup>

@@ -9,7 +9,6 @@
     }
 
     hr.green {
-        
         border: 1px solid groove;
         border-radius: 5px;
         margin-top: -5px;
@@ -23,13 +22,14 @@
     <div>
         @foreach (var project in Model)
         {
-            @project.ProjectName<br />
+        <p>Main project Names @project.ProjectName</p>  
             foreach (var webapp in project.WebServices)
             {
-                @webapp.WebAppUrl<br />
+                <p> Web app url @webapp.WebAppUrl </p> <br />
                 foreach (var item in webapp.WebAppDetails)
                 {
-                    @item.WebAppAltUrl
+                <p> alt urller @item.WebAppAltUrl</p><br />
+                   @item.Id
                 }
             }
         }

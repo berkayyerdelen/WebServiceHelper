@@ -19,6 +19,10 @@ namespace WebServiceHelper.Context
         public DbSet<WebApps> WebApps{ get; set; }
         public DbSet<WebAppDetails> WebAppDetails { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+        }
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             

@@ -17,7 +17,7 @@ namespace WebServiceHelper.Entities.Domains
             CreatedDate = DateTime.Now;
         }
         [ForeignKey("ProjectId")]
-        public Project Project { get; set; }
+        public virtual Project Project { get; set; }
         public virtual ICollection<WebAppDetails> WebAppDetails { get; set; }
         public WebAppType WebAppType { get; set; }
 

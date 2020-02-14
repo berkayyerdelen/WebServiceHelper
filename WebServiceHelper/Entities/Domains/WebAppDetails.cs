@@ -13,7 +13,7 @@ namespace WebServiceHelper.Entities.Domains
         public int WebAppId { get; set; }
 
         [ForeignKey("WebAppId")]
-        public WebApps WebServices { get; set; }
+        public virtual WebApps WebServices { get; set; }
         
         public WebAppDetails()
         {

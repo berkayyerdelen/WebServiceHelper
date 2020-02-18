@@ -22,14 +22,14 @@
     <div>
         @foreach (var project in Model)
         {
-        <p>Main project Names @project.ProjectName</p>  
+        <p>@project.ProjectName</p>  
             foreach (var webapp in project.WebServices)
             {
-                <p> Web app url @webapp.WebAppUrl </p> <br />
+                 @webapp.WebAppUrl <br />
                 foreach (var item in webapp.WebAppDetails)
                 {
-                <p> alt urller @item.WebAppAltUrl</p><br />
-                   @item.Id
+                 @item.WebAppAltUrl<br />
+                  
                 }
             }
         }

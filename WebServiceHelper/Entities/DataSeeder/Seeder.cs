@@ -11,7 +11,7 @@ namespace WebServiceHelper.Entities.DataSeeder
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            
+
 
             modelBuilder.Entity<Project>().HasData(new Project
             {
@@ -21,80 +21,56 @@ namespace WebServiceHelper.Entities.DataSeeder
                 CreatedDate = DateTime.Now,
                 ModifiedBy = "Berkay",
                 ModifiedDate = null,
-                WebServices = new List<WebApps>() {
-                    new WebApps()
-                    {
-                        Id = 1,
-                        CreatedDate = DateTime.Now,
-                        ModifiedDate = null,
-                        CreatedBy = "Berkay",
-                        ProjectId = 1,
-                        ModifiedBy = null,
-                        WebAppType =WebAppType.WebApi,
-                        WebAppUrl = "www.google.com.tr/",
-                        WebAppDetails = new List<WebAppDetails>()
-                        {
-                            new WebAppDetails()
-                            {
-                               Id =1,
-                               CreatedDate =DateTime.Now,
-                               ModifiedDate= null,
-                               WebAppAltUrl ="www.google.com.tr/altUrl1",
-                               CreatedBy ="Berkay",
-                               ModifiedBy =null,
-                               WebAppId =1
-                              
-                            },
-                             new WebAppDetails()
-                            {
-                               Id =2,
-                               CreatedDate =DateTime.Now,
-                               ModifiedDate= null,
-                               WebAppAltUrl ="www.google.com.tr/altUrl2",
-                               CreatedBy ="Berkay",
-                               ModifiedBy =null,
-                               WebAppId =1
-
-                            },
-                              new WebAppDetails()
-                            {
-                               Id =3,
-                               CreatedDate =DateTime.Now,
-                               ModifiedDate= null,
-                               WebAppAltUrl ="www.google.com.tr/altUrl3",
-                               CreatedBy ="Berkay",
-                               ModifiedBy =null,
-                               WebAppId =1
-
-                            },
-                                  new WebAppDetails()
-                            {
-                               Id =4,
-                               CreatedDate =DateTime.Now,
-                               ModifiedDate= null,
-                               WebAppAltUrl ="www.google.com.tr/altUrl4",
-                               CreatedBy ="Berkay",
-                               ModifiedBy =null,
-                               WebAppId =1
-
-                            },
-                                      new WebAppDetails()
-                            {
-                               Id =5,
-                               CreatedDate =DateTime.Now,
-                               ModifiedDate= null,
-                               WebAppAltUrl ="www.google.com.tr/altUrl5",
-                               CreatedBy ="Berkay",
-                               ModifiedBy =null,
-                               WebAppId =1
-
-                            }
-                        }
-
-                    }}
-
+               
+            });
+            modelBuilder.Entity<WebApps>().HasData(new WebApps
+            {
+                Id = 1,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = null,
+                CreatedBy = "Berkay",
+                ModifiedBy = null,
+                WebAppType = WebAppType.WebApi,
+                WebAppUrl = "www.google.com.tr/",
+                ProjectId = 1,
 
             });
+
+            modelBuilder.Entity<WebAppDetails>().HasData(new WebAppDetails
+            {
+                Id = 1,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = null,
+                WebAppAltUrl = "www.google.com.tr/altUrl1",
+                CreatedBy = "Berkay",
+                ModifiedBy = null,
+                WebAppId = 1
+
+            });
+            modelBuilder.Entity<WebAppDetails>().HasData(new WebAppDetails
+            {
+                Id = 2,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = null,
+                WebAppAltUrl = "www.google.com.tr/altUrl2",
+                CreatedBy = "Berkay",
+                ModifiedBy = null,
+                WebAppId = 1
+
+            });
+            modelBuilder.Entity<WebAppDetails>().HasData(new WebAppDetails
+            {
+                Id = 3,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = null,
+                WebAppAltUrl = "www.google.com.tr/altUrl3",
+                CreatedBy = "Berkay",
+                ModifiedBy = null,
+                WebAppId = 1
+
+            });
+
+
         }
     }
 }

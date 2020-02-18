@@ -30,7 +30,7 @@ namespace WebServiceHelper.Controllers
 
         public IActionResult Index()
         {
-            var a =_projectRepository.GetAll().Result;             
+            var a = _projectRepository.GetAll().Result;          
             return View(a);
 
         }

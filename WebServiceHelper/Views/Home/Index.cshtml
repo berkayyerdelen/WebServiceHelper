@@ -1,4 +1,4 @@
-﻿@model IList<WebServiceHelper.Entities.Domains.Project>
+﻿
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -9,7 +9,7 @@
     }
 
     hr.green {
-        border: 1px solid groove;
+        border: 1px solid ;
         border-radius: 5px;
         margin-top: -5px;
     }
@@ -20,19 +20,7 @@
     <hr class="green" />
     <p>This container has a dark background color and a white text, and some extra padding and margins.</p>
     <div>
-        @foreach (var project in Model)
-        {
-        <p>@project.ProjectName</p>  
-            foreach (var webapp in project.WebServices)
-            {
-                 @webapp.WebAppUrl <br />
-                foreach (var item in webapp.WebAppDetails)
-                {
-                 @item.WebAppAltUrl<br />
-                  
-                }
-            }
-        }
+       
     </div>
 </div>
 

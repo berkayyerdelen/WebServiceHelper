@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-using WebServiceHelper.Entities.BaseEntities;
+using Domain.Common.BaseEntites;
 
-namespace WebServiceHelper.Entities.Domains
+namespace Domain.Entities
 {
     public class WebAppDetails : FullAuditedEntity<int>
     {
@@ -14,12 +11,11 @@ namespace WebServiceHelper.Entities.Domains
 
         [ForeignKey("WebAppId")]
         public virtual WebApps WebServices { get; set; }
-        
+
         public WebAppDetails()
         {
             CreatedDate = DateTime.Now;
         }
 
     }
-   
 }

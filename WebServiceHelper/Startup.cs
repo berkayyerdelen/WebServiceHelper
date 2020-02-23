@@ -1,7 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using Core.Interface.EntityFramework;
+using Infrastructure.ApplicationContext;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,9 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WebServiceHelper.Context;
-using WebServiceHelper.Services;
-using AppContext = WebServiceHelper.Context.AppDbContext;
+
 
 namespace WebServiceHelper
 {
@@ -29,11 +31,9 @@ namespace WebServiceHelper
         {
             var configurationSection = Configuration.GetSection("ConnectionStrings:DefaultConnection");
             services.AddControllersWithViews();
-            services.AddScoped<IAppContext>(s => s.GetService<AppContext>());
-           
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddDbContext<WebServiceHelper.Context.AppDbContext>(options => options.UseSqlServer(configurationSection.Value));
-           
+            services.AddScoped<IApplicationDbContext>(s => s.GetService<ApplicationDbContext>());
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configurationSection.Value));
+            services.AddMediatR(Assembly.GetExecutingAssembly());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

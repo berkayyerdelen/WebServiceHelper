@@ -1,11 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebServiceHelper.Entities.Domains;
+﻿using System;
+using Domain.Entities;
+using Domain.Enums;
+using Microsoft.EntityFrameworkCore;
 
-namespace WebServiceHelper.Entities.DataSeeder
+namespace Infrastructure.DataSeeder
 {
     public static class Seeder
     {
@@ -21,7 +19,7 @@ namespace WebServiceHelper.Entities.DataSeeder
                 CreatedDate = DateTime.Now,
                 ModifiedBy = "Berkay",
                 ModifiedDate = null,
-               
+
             });
             modelBuilder.Entity<WebApps>().HasData(new WebApps
             {

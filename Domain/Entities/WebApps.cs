@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-using WebServiceHelper.Entities.BaseEntities;
+using Domain.Common.BaseEntites;
+using Domain.Enums;
 
-namespace WebServiceHelper.Entities.Domains
+namespace Domain.Entities
 {
     public class WebApps : FullAuditedEntity<int>
     {
-        public string WebAppUrl{ get; set; }
+        public string WebAppUrl { get; set; }
         public int ProjectId { get; set; }
 
         public WebApps()
@@ -22,9 +21,5 @@ namespace WebServiceHelper.Entities.Domains
         public WebAppType WebAppType { get; set; }
 
     }
-    public enum WebAppType : byte
-    {
-        WebApi = 1,
-        WebSite = 2
-    }
+   
 }

@@ -6,6 +6,6 @@ namespace Core.Domain.Project.Queries
 {
     public class GetProjectDetailsViewModel
     {
-        public IList<GetProjectDetailModel> GetProjectDetailModels { get; set; }
+        List<GetProjectDetailDto> GetProjectDetailModels { get; set; }
     }
 }

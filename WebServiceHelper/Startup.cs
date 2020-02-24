@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
+using Core.Domain.Project.Queries;
 using Core.Interface.EntityFramework;
 using Infrastructure.ApplicationContext;
 using MediatR;
@@ -31,9 +33,12 @@ namespace WebServiceHelper
         {
             var configurationSection = Configuration.GetSection("ConnectionStrings:DefaultConnection");
             services.AddControllersWithViews();
+            
             services.AddScoped<IApplicationDbContext>(s => s.GetService<ApplicationDbContext>());
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configurationSection.Value));
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(typeof(GetProjectDetailsQuery));
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
+using Core.Common.Mapper;
 using Core.Domain.Project.Queries;
 using Core.Interface.EntityFramework;
 using Infrastructure.ApplicationContext;
@@ -39,6 +40,13 @@ namespace WebServiceHelper
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddMediatR(typeof(GetProjectDetailsQuery));
             services.AddAutoMapper(typeof(Startup));
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

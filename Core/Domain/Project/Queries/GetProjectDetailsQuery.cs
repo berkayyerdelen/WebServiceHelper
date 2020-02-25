@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Core.Interface.EntityFramework;
 using MediatR;
@@ -11,7 +12,7 @@ namespace Core.Domain.Project.Queries
 {
     public class GetProjectDetailsQuery:IRequest<GetProjectDetailsViewModel>
     {
-        public class Handler:IRequestHandler<GetProjectDetailsQuery,GetProjectDetailsViewModel>
+        public class Handler : IRequestHandler<GetProjectDetailsQuery, GetProjectDetailsViewModel>
         {
             public readonly IApplicationDbContext _context;
             public readonly IMapper _mapper;
@@ -23,18 +24,29 @@ namespace Core.Domain.Project.Queries
 
             public async Task<GetProjectDetailsViewModel> Handle(GetProjectDetailsQuery request, CancellationToken cancellationToken)
             {
-                var projectDetails = await _context.Set<global::Domain.Entities.Project>().ToListAsync(cancellationToken);
-
-                //var a = _mapper.Map<GetProjectDetailsViewModel>(projectDetails);
-                var a = new GetProjectDetailsViewModel()
+                try
                 {
-                    
-                };
-                
+                    var projectDetails = await _context.Set<global::Domain.Entities.Project>().ToListAsync(cancellationToken);
+
+                    //var t = new GetProjectDetailsViewModel()
+                    //{
+
+                    //};
+                    var a = _mapper.Map<GetProjectDetailsViewModel>(projectDetails);
+                    return a;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+         
 
 
 
-                return a;
+
+
+               
             }
         }
     }

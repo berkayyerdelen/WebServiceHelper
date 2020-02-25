@@ -11,6 +11,8 @@ namespace Core.Domain.Project.Queries
         public int Id { get; set; }
         public string ProjectName { get; set; }
         public virtual ICollection<WebAppsDto> Webapps { get; set; }
+
+      
     }
 
     public class WebAppsDto

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Domain.Common.BaseEntites;
 using Domain.Enums;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Domain.Entities
 {
@@ -14,6 +15,7 @@ namespace Domain.Entities
         public WebApps()
         {
             CreatedDate = DateTime.Now;
+            WebAppDetails = new List<WebAppDetails>();
         }
         [ForeignKey("ProjectId")]
         public virtual Project Project { get; set; }

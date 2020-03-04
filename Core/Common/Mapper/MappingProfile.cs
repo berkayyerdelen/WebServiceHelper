@@ -11,8 +11,10 @@ namespace Core.Common.Mapper
     {
         public MappingProfile()
         {
-            CreateMap<Project, GetProjectDetailsViewModel>();
-            CreateMap<GetProjectDetailsViewModel, Project>();
+            
+            CreateMap<Project, GetProjectDetailDto>();
+            CreateMap<List<Project>, List<GetProjectDetailDto>>();
+            //CreateMap<GetProjectDetailsViewModel, Project>();
         }
     }
 }

@@ -10,9 +10,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.Domain.Project.Queries
 {
-    public class GetProjectDetailsQuery:IRequest<GetProjectDetailsViewModel>
+    public class GetProjectDetailsQuery:IRequest<List<global::Domain.Entities.Project>>
     {
-        public class Handler : IRequestHandler<GetProjectDetailsQuery, GetProjectDetailsViewModel>
+        public class Handler : IRequestHandler<GetProjectDetailsQuery, List<global::Domain.Entities.Project>>
         {
             public readonly IApplicationDbContext _context;
             public readonly IMapper _mapper;
@@ -22,32 +22,18 @@ namespace Core.Domain.Project.Queries
                 _mapper = mapper;
             }
 
-            public async Task<GetProjectDetailsViewModel> Handle(GetProjectDetailsQuery request, CancellationToken cancellationToken)
+            public async Task<List<global::Domain.Entities.Project>> Handle(GetProjectDetailsQuery request, CancellationToken cancellationToken)
             {
-                try
-                {
-                    var projectDetails = await _context.Set<global::Domain.Entities.Project>().ToListAsync(cancellationToken);
 
-                    //var t = new GetProjectDetailsViewModel()
-                    //{
-
-                    //};
-                    var a = _mapper.Map<GetProjectDetailsViewModel>(projectDetails);
-                    return a;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
-         
-
-
-
-
-
+                var projectDetails = await _context.Set<global::Domain.Entities.Project>().
+                Include(x => x.Webapps).ThenInclude(c=>c.WebAppDetails).
+                ToListAsync(cancellationToken);               
+                return projectDetails;
+                       
                
             }
+
+           
         }
     }
 }

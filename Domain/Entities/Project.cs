@@ -11,6 +11,7 @@ namespace Domain.Entities
         public Project()
         {
             CreatedDate = DateTime.Now;
+            Webapps = new List<WebApps>();
         }
     }
 }

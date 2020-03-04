@@ -30,5 +30,6 @@ namespace Core.Domain.Project.Queries
         public int Id { get; set; }
         public string WebAppAltUrl { get; set; }
         public int WebAppId { get; set; }
+        public virtual WebAppsDto WebApps { get; set; }
     }
 }

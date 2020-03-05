@@ -20,7 +20,23 @@
     <hr class="green" />
     <p>This container has a dark background color and a white text, and some extra padding and margins.</p>
     <div>
-
+       @{ 
+           foreach (var item in Model)
+           {
+               //<p>test</p>
+               @item.ProjectName<br />
+               foreach (var webApps in item.Webapps)
+               {
+                   @webApps.WebAppUrl<br />
+                   @webApps.WebAppType<br />
+                   foreach (var webappdetails in webApps.WebAppDetails)
+                   {
+                       @webappdetails.WebAppAltUrl<br />
+                       @webappdetails.CreatedDate<br />
+                   }
+               }
+           }
+       }
 
     </div>
 </div>

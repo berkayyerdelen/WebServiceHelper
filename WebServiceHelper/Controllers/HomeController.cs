@@ -18,7 +18,7 @@ namespace WebServiceHelper.Controllers
 
         public HomeController(ILogger<HomeController> logger, IMediator mediator)
             => (_logger,_mediator) = (logger,mediator);
-
+        
         public IActionResult Index()
         {
             var projectdetails = _mediator.Send(new GetProjectDetailsQuery(),CancellationToken.None).Result;

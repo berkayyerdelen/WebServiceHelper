@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Core.Common.Attributes;
 using Core.Domain.Project.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,8 @@ namespace WebServiceHelper.Controllers
 
         public HomeController(ILogger<HomeController> logger, IMediator mediator)
             => (_logger,_mediator) = (logger,mediator);
-        
+
+        [Cache(10,"GetProjects")]
         public IActionResult Index()
         {
             var projectdetails = _mediator.Send(new GetProjectDetailsQuery(),CancellationToken.None).Result;

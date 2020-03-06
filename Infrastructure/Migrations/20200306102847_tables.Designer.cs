@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200223113224_first_tables")]
-    partial class first_tables
+    [Migration("20200306102847_tables")]
+    partial class tables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.1")
+                .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -52,9 +52,17 @@ namespace Infrastructure.Migrations
                         {
                             Id = 1,
                             CreatedBy = "Berkay",
-                            CreatedDate = new DateTime(2020, 2, 23, 14, 32, 23, 602, DateTimeKind.Local).AddTicks(9839),
+                            CreatedDate = new DateTime(2020, 3, 6, 13, 28, 46, 834, DateTimeKind.Local).AddTicks(5631),
                             ModifiedBy = "Berkay",
                             ProjectName = "Project1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "Berkay",
+                            CreatedDate = new DateTime(2020, 3, 6, 13, 28, 46, 838, DateTimeKind.Local).AddTicks(1150),
+                            ModifiedBy = "Berkay",
+                            ProjectName = "Project2"
                         });
                 });
 
@@ -94,7 +102,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 1,
                             CreatedBy = "Berkay",
-                            CreatedDate = new DateTime(2020, 2, 23, 14, 32, 23, 604, DateTimeKind.Local).AddTicks(9022),
+                            CreatedDate = new DateTime(2020, 3, 6, 13, 28, 46, 837, DateTimeKind.Local).AddTicks(9710),
                             WebAppAltUrl = "www.google.com.tr/altUrl1",
                             WebAppId = 1
                         },
@@ -102,7 +110,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 2,
                             CreatedBy = "Berkay",
-                            CreatedDate = new DateTime(2020, 2, 23, 14, 32, 23, 605, DateTimeKind.Local).AddTicks(167),
+                            CreatedDate = new DateTime(2020, 3, 6, 13, 28, 46, 838, DateTimeKind.Local).AddTicks(1043),
                             WebAppAltUrl = "www.google.com.tr/altUrl2",
                             WebAppId = 1
                         },
@@ -110,9 +118,33 @@ namespace Infrastructure.Migrations
                         {
                             Id = 3,
                             CreatedBy = "Berkay",
-                            CreatedDate = new DateTime(2020, 2, 23, 14, 32, 23, 605, DateTimeKind.Local).AddTicks(227),
+                            CreatedDate = new DateTime(2020, 3, 6, 13, 28, 46, 838, DateTimeKind.Local).AddTicks(1088),
                             WebAppAltUrl = "www.google.com.tr/altUrl3",
                             WebAppId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedBy = "Berkay",
+                            CreatedDate = new DateTime(2020, 3, 6, 13, 28, 46, 838, DateTimeKind.Local).AddTicks(1233),
+                            WebAppAltUrl = "www.google.com.tr/altUrl1",
+                            WebAppId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedBy = "Berkay",
+                            CreatedDate = new DateTime(2020, 3, 6, 13, 28, 46, 838, DateTimeKind.Local).AddTicks(1255),
+                            WebAppAltUrl = "www.google.com.tr/altUrl2",
+                            WebAppId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedBy = "Berkay",
+                            CreatedDate = new DateTime(2020, 3, 6, 13, 28, 46, 838, DateTimeKind.Local).AddTicks(1279),
+                            WebAppAltUrl = "www.google.com.tr/altUrl3",
+                            WebAppId = 2
                         });
                 });
 
@@ -155,8 +187,17 @@ namespace Infrastructure.Migrations
                         {
                             Id = 1,
                             CreatedBy = "Berkay",
-                            CreatedDate = new DateTime(2020, 2, 23, 14, 32, 23, 604, DateTimeKind.Local).AddTicks(6341),
+                            CreatedDate = new DateTime(2020, 3, 6, 13, 28, 46, 837, DateTimeKind.Local).AddTicks(6614),
                             ProjectId = 1,
+                            WebAppType = (byte)1,
+                            WebAppUrl = "www.google.com.tr/"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "Berkay",
+                            CreatedDate = new DateTime(2020, 3, 6, 13, 28, 46, 838, DateTimeKind.Local).AddTicks(1186),
+                            ProjectId = 2,
                             WebAppType = (byte)1,
                             WebAppUrl = "www.google.com.tr/"
                         });

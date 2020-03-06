@@ -33,8 +33,8 @@ namespace WebServiceHelper
         public void ConfigureServices(IServiceCollection services)
         {
             var configurationSection = Configuration.GetSection("ConnectionStrings:DefaultConnection");
-            services.AddControllersWithViews();
-            
+           
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddScoped<IApplicationDbContext>(s => s.GetService<ApplicationDbContext>());
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configurationSection.Value));
             services.AddMediatR(Assembly.GetExecutingAssembly());
@@ -47,7 +47,7 @@ namespace WebServiceHelper
 
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
-
+            
             services.AddMemoryCache();
 
         }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class first_tables : Migration
+    public partial class tables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -76,27 +76,35 @@ namespace Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "Project",
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "ModifiedBy", "ModifiedDate", "ProjectName" },
-                values: new object[] { 1, "Berkay", new DateTime(2020, 2, 23, 14, 32, 23, 602, DateTimeKind.Local).AddTicks(9839), "Berkay", null, "Project1" });
+                values: new object[] { 1, "Berkay", new DateTime(2020, 3, 6, 13, 28, 46, 834, DateTimeKind.Local).AddTicks(5631), "Berkay", null, "Project1" });
+
+            migrationBuilder.InsertData(
+                table: "Project",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "ModifiedBy", "ModifiedDate", "ProjectName" },
+                values: new object[] { 2, "Berkay", new DateTime(2020, 3, 6, 13, 28, 46, 838, DateTimeKind.Local).AddTicks(1150), "Berkay", null, "Project2" });
 
             migrationBuilder.InsertData(
                 table: "WebApps",
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "ModifiedBy", "ModifiedDate", "ProjectId", "WebAppType", "WebAppUrl" },
-                values: new object[] { 1, "Berkay", new DateTime(2020, 2, 23, 14, 32, 23, 604, DateTimeKind.Local).AddTicks(6341), null, null, 1, (byte)1, "www.google.com.tr/" });
+                values: new object[] { 1, "Berkay", new DateTime(2020, 3, 6, 13, 28, 46, 837, DateTimeKind.Local).AddTicks(6614), null, null, 1, (byte)1, "www.google.com.tr/" });
+
+            migrationBuilder.InsertData(
+                table: "WebApps",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "ModifiedBy", "ModifiedDate", "ProjectId", "WebAppType", "WebAppUrl" },
+                values: new object[] { 2, "Berkay", new DateTime(2020, 3, 6, 13, 28, 46, 838, DateTimeKind.Local).AddTicks(1186), null, null, 2, (byte)1, "www.google.com.tr/" });
 
             migrationBuilder.InsertData(
                 table: "WebAppDetails",
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "ModifiedBy", "ModifiedDate", "WebAppAltUrl", "WebAppId" },
-                values: new object[] { 1, "Berkay", new DateTime(2020, 2, 23, 14, 32, 23, 604, DateTimeKind.Local).AddTicks(9022), null, null, "www.google.com.tr/altUrl1", 1 });
-
-            migrationBuilder.InsertData(
-                table: "WebAppDetails",
-                columns: new[] { "Id", "CreatedBy", "CreatedDate", "ModifiedBy", "ModifiedDate", "WebAppAltUrl", "WebAppId" },
-                values: new object[] { 2, "Berkay", new DateTime(2020, 2, 23, 14, 32, 23, 605, DateTimeKind.Local).AddTicks(167), null, null, "www.google.com.tr/altUrl2", 1 });
-
-            migrationBuilder.InsertData(
-                table: "WebAppDetails",
-                columns: new[] { "Id", "CreatedBy", "CreatedDate", "ModifiedBy", "ModifiedDate", "WebAppAltUrl", "WebAppId" },
-                values: new object[] { 3, "Berkay", new DateTime(2020, 2, 23, 14, 32, 23, 605, DateTimeKind.Local).AddTicks(227), null, null, "www.google.com.tr/altUrl3", 1 });
+                values: new object[,]
+                {
+                    { 1, "Berkay", new DateTime(2020, 3, 6, 13, 28, 46, 837, DateTimeKind.Local).AddTicks(9710), null, null, "www.google.com.tr/altUrl1", 1 },
+                    { 2, "Berkay", new DateTime(2020, 3, 6, 13, 28, 46, 838, DateTimeKind.Local).AddTicks(1043), null, null, "www.google.com.tr/altUrl2", 1 },
+                    { 3, "Berkay", new DateTime(2020, 3, 6, 13, 28, 46, 838, DateTimeKind.Local).AddTicks(1088), null, null, "www.google.com.tr/altUrl3", 1 },
+                    { 4, "Berkay", new DateTime(2020, 3, 6, 13, 28, 46, 838, DateTimeKind.Local).AddTicks(1233), null, null, "www.google.com.tr/altUrl1", 2 },
+                    { 5, "Berkay", new DateTime(2020, 3, 6, 13, 28, 46, 838, DateTimeKind.Local).AddTicks(1255), null, null, "www.google.com.tr/altUrl2", 2 },
+                    { 6, "Berkay", new DateTime(2020, 3, 6, 13, 28, 46, 838, DateTimeKind.Local).AddTicks(1279), null, null, "www.google.com.tr/altUrl3", 2 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_WebAppDetails_WebAppId",

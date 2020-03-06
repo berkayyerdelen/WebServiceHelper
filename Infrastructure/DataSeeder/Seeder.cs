@@ -69,6 +69,64 @@ namespace Infrastructure.DataSeeder
             });
 
 
+            modelBuilder.Entity<Project>().HasData(new Project
+            {
+                Id = 2,
+                ProjectName = "Project2",
+                CreatedBy = "Berkay",
+                CreatedDate = DateTime.Now,
+                ModifiedBy = "Berkay",
+                ModifiedDate = null,
+
+            });
+            modelBuilder.Entity<WebApps>().HasData(new WebApps
+            {
+                Id = 2,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = null,
+                CreatedBy = "Berkay",
+                ModifiedBy = null,
+                WebAppType = WebAppType.WebApi,
+                WebAppUrl = "www.google.com.tr/",
+                ProjectId = 2,
+
+            });
+
+            modelBuilder.Entity<WebAppDetails>().HasData(new WebAppDetails
+            {
+                Id = 4,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = null,
+                WebAppAltUrl = "www.google.com.tr/altUrl1",
+                CreatedBy = "Berkay",
+                ModifiedBy = null,
+                WebAppId = 2
+
+            });
+            modelBuilder.Entity<WebAppDetails>().HasData(new WebAppDetails
+            {
+                Id = 5,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = null,
+                WebAppAltUrl = "www.google.com.tr/altUrl2",
+                CreatedBy = "Berkay",
+                ModifiedBy = null,
+                WebAppId = 2
+
+            });
+            modelBuilder.Entity<WebAppDetails>().HasData(new WebAppDetails
+            {
+                Id = 6,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = null,
+                WebAppAltUrl = "www.google.com.tr/altUrl3",
+                CreatedBy = "Berkay",
+                ModifiedBy = null,
+                WebAppId = 2
+
+            });
+
+
         }
     }
 }

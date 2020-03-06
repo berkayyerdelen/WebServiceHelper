@@ -9,6 +9,7 @@ using Core.Domain.Project.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using WebServiceHelper.ViewModel;
 
 namespace WebServiceHelper.Controllers
 {
@@ -20,12 +21,15 @@ namespace WebServiceHelper.Controllers
         public HomeController(ILogger<HomeController> logger, IMediator mediator)
             => (_logger,_mediator) = (logger,mediator);
 
-        [Cache(10,"GetProjects")]
+        
         public IActionResult Index()
         {
             var projectdetails = _mediator.Send(new GetProjectDetailsQuery(),CancellationToken.None).Result;
-           
-            return View(projectdetails);
+
+            return View("Index",new ProjectViewModel()
+            {
+                projectViewModel= projectdetails
+            });
         }
 
         public IActionResult Management()

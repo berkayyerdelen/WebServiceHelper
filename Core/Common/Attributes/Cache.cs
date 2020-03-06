@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Core.Common.Attributes
 {
-    [AttributeUsage(AttributeTargets.All)]
+    [AttributeUsage(AttributeTargets.Field)]
     public class Cache : Attribute
     {
-        private CacheRepository tet = new CacheRepository();
+
         
         public int Duration { get; set; }
         public string CacheKey { get; set; }

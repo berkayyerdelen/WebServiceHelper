@@ -1,4 +1,4 @@
-﻿@model Core.Domain.Project.Queries.RestApi.Dto.RestApiResponseDto
+﻿@model Core.Domain.Project.Queries.RestApi.Dto.RestApiRequestDto
 @{
     ViewData["Title"] = "Rest Services";
 }
@@ -18,12 +18,12 @@
         
     </div>
 
-
+    @Html.TextBoxFor(x=>x.Token);
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 
 <div class="form-group">
     <label for="exampleFormControlTextarea1">Example textarea</label>
-     @Html.TextAreaFor(x=>x.Response,new { @class = "form-control" })
+     @Html.TextAreaFor(x=>x.Request,new { @class = "form-control" })
 </div>

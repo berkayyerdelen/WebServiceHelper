@@ -22,16 +22,16 @@ namespace WebServiceHelper.Controllers
         private readonly IMediator _mediator;
 
         public HomeController(ILogger<HomeController> logger, IMediator mediator)
-            => (_logger,_mediator) = (logger,mediator);
+            => (_logger, _mediator) = (logger, mediator);
 
-        
+
         public IActionResult Index()
         {
-            var projectdetails = _mediator.Send(new GetProjectDetailsQuery(),CancellationToken.None).Result;
+            var projectdetails = _mediator.Send(new GetProjectDetailsQuery(), CancellationToken.None).Result;
 
-            return View("Index",new ProjectViewModel()
+            return View("Index", new ProjectViewModel()
             {
-                projectViewModel= projectdetails
+                projectViewModel = projectdetails
             });
         }
         [HttpGet]
@@ -41,16 +41,11 @@ namespace WebServiceHelper.Controllers
         }
 
         [HttpPost]
-        public IActionResult RestService(RestApiResponseDto t)
+        public IActionResult RestService(RestApiRequestDto requests)
         {
-           
-                var query = _mediator.Send(new RestApiQueryHandler(t), CancellationToken.None).Result;
-                return View(query);
-           
-           
-            
+            var query = _mediator.Send(new RestApiQueryHandler(requests), CancellationToken.None).Result;
+            return View(query);
+
         }
-
-
     }
 }

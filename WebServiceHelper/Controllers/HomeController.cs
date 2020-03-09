@@ -43,12 +43,11 @@ namespace WebServiceHelper.Controllers
         [HttpPost]
         public IActionResult RestService(RestApiResponseDto t)
         {
-            if (ModelState.IsValid)
-            {
-                var k = _mediator.Send(new RestApiQueryHandler(t), CancellationToken.None).Result;
-                return View(k);
-            }
-            return View();
+           
+                var query = _mediator.Send(new RestApiQueryHandler(t), CancellationToken.None).Result;
+                return View(query);
+           
+           
             
         }
 

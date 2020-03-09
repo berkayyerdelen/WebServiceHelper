@@ -11,11 +11,11 @@
 <form action="RestService" method="post">
 
     @Html.DropDownListFor(o => o.HttpType, Enum.GetValues(typeof(Domain.Enums.HttpType)).Cast<Domain.Enums.HttpType>
-        ().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }))
+        ().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }),new { @class = "form-control" })
     <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        @Html.TextBoxFor(x => x.ApiURL);
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <label for="exampleInputEmail1">API Url</label>
+        @Html.TextBoxFor(x => x.ApiURL,new { @class = "form-control" })
+        
     </div>
 
 
@@ -25,5 +25,5 @@
 
 <div class="form-group">
     <label for="exampleFormControlTextarea1">Example textarea</label>
-     @Html.TextAreaFor(x=>x.Response)
+     @Html.TextAreaFor(x=>x.Response,new { @class = "form-control" })
 </div>

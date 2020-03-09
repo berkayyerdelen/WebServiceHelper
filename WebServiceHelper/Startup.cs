@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Core.Common.Mapper;
 using Core.Domain.Project.Queries;
+using Core.Domain.Project.Queries.Project;
 using Core.Interface.EntityFramework;
 using Infrastructure.ApplicationContext;
 using MediatR;

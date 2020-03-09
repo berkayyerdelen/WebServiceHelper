@@ -1,11 +1,12 @@
 ﻿using Domain.Enums;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Core.Domain.Project.Queries.RestApi.Dto
 {
-    public class RestApiResponseDto
+    public class RestApiResponseDto:IRequest
     {
         public string ApiURL { get; set; }
         public string Token { get; set; }

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Core.Common.Attributes;
 using Core.Domain.Project.Queries;
 using Core.Domain.Project.Queries.Project;
+using Core.Domain.Project.Queries.RestApi;
+using Core.Domain.Project.Queries.RestApi.Dto;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -39,9 +41,15 @@ namespace WebServiceHelper.Controllers
         }
 
         [HttpPost]
-        public IActionResult RestService(string t)
+        public IActionResult RestService(RestApiResponseDto t)
         {
+            if (ModelState.IsValid)
+            {
+                var k = _mediator.Send(new RestApiQueryHandler(t), CancellationToken.None).Result;
+                return View(k);
+            }
             return View();
+            
         }
 
 

@@ -1,6 +1,29 @@
-﻿@{
+﻿@model Core.Domain.Project.Queries.RestApi.Dto.RestApiResponseDto
+@{
     ViewData["Title"] = "Rest Services";
 }
 <h1>@ViewData["Title"]</h1>
 
 <p>Use this page to detail your site's privacy policy.</p>
+
+
+
+<form action="RestService" method="post">
+
+    @Html.DropDownListFor(o => o.HttpType, Enum.GetValues(typeof(Domain.Enums.HttpType)).Cast<Domain.Enums.HttpType>
+        ().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }))
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        @Html.TextBoxFor(x => x.ApiURL);
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+<div class="form-group">
+    <label for="exampleFormControlTextarea1">Example textarea</label>
+     @Html.TextAreaFor(x=>x.Response)
+</div>

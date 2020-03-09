@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Domain.Project.Queries;
+using Core.Domain.Project.Queries.Project;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;

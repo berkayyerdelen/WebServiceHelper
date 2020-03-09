@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
-namespace Core.Domain.Project.Queries
+namespace Core.Domain.Project.Queries.Project
 {
     public class GetProjectDetailsQuery:IRequest<List<GetProjectDetailDto>>
     {

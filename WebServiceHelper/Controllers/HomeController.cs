@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Core.Common.Attributes;
 using Core.Domain.Project.Queries;
+using Core.Domain.Project.Queries.Project;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -31,8 +32,14 @@ namespace WebServiceHelper.Controllers
                 projectViewModel= projectdetails
             });
         }
+        [HttpGet]
+        public IActionResult RestService()
+        {
+            return View();
+        }
 
-        public IActionResult Management()
+        [HttpPost]
+        public IActionResult RestService(string t)
         {
             return View();
         }

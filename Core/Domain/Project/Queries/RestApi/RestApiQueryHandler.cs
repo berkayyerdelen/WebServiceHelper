@@ -26,22 +26,33 @@ namespace Core.Domain.Project.Queries.RestApi
                 var client = new RestClient(request.property.ApiURL);
                 var deserial = new JsonDeserializer();
                 var restApiResponseDto = new RestApiResponseDto();
+                
                 switch (request.property.HttpType)
                 {
                     case HttpType.Get:
-                        var req = new RestRequest(Method.GET);
-                        var context = client.ExecuteAsync(req).Result;
+                        var reqGet = new RestRequest(Method.GET);
+                        var contextGet = client.ExecuteAsync(reqGet).Result;
                         restApiResponseDto.ApiURL = request.property.ApiURL;
                         restApiResponseDto.HttpType = request.property.HttpType;
                         restApiResponseDto.Token = request.property.Token ?? null;
-                        restApiResponseDto.Response = context.Content;
+                        restApiResponseDto.Response = contextGet.Content;
                         return Task.FromResult(restApiResponseDto);                                   
 
                     case HttpType.Post:
+                        var reqPost = new RestRequest(Method.POST);
+                        reqPost.RequestFormat = DataFormat.Json;
+                        reqPost.AddJsonBody(request.property.Response);
+                        var response = client.ExecuteAsync(reqPost);
                         return null;
                     case HttpType.Delete:
+                        var reqDelete = new RestRequest(Method.DELETE);
+                        var responseDelete = client.ExecuteAsync(reqDelete);
                         return null;
                     case HttpType.Put:
+                        var reqPut = new RestRequest(Method.PUT);
+                        reqPut.RequestFormat = DataFormat.Json;                    
+                        reqPut.AddJsonBody(request.property.Response);
+                        var responseUpdate = client.ExecuteAsync(reqPut);
                         return null;
                     default:
                         return null;

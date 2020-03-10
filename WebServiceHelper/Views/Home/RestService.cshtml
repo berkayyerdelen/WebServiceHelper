@@ -18,19 +18,21 @@
     @Html.DropDownListFor(o => o.HttpType, Enum.GetValues(typeof(Domain.Enums.HttpType)).Cast<Domain.Enums.HttpType>
         ().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }), new { @class = "form-control" })
     <div class="form-group">
-        <label for="exampleInputEmail1">API Url</label>
-        @Html.TextBoxFor(x => x.ApiURL, new { @class = "form-control" })
+       
+      
+    <input type="type" class="form-control" name="ApiURL" id="ApiURL" asp-for="ApiURL" />
 
     </div>
 
 
     <button type="submit" class="btn btn-primary">Submit</button>
-    <button type="button" id="target" class="btn btn-primary">Primary</button>
+   @* <button type="button" id="target" class="btn btn-primary">Primary</button>*@
 </form>
 
 
 <div class="form-group">
     <label for="exampleFormControlTextarea1">Example textarea</label>
-    @Html.TextAreaFor(x => x.Response, new { @class = "form-control" })
+   @* @Html.TextAreaFor(x => x.Response, new { @class = "form-control" })*@
+    <textarea class="form-control" asp-for="Response" style="height: 231px"></textarea>
 </div>
 <script src="~/highlighter/highlighter.js"></script>

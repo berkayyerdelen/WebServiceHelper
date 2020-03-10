@@ -41,7 +41,7 @@ namespace WebServiceHelper.Controllers
         }
 
         [HttpPost]
-        public IActionResult RestService(RestApiRequestDto requests)
+        public IActionResult RestService(RestApiResponseDto requests)
         {
             var query = _mediator.Send(new RestApiQueryHandler(requests), CancellationToken.None).Result;
             return View(query);

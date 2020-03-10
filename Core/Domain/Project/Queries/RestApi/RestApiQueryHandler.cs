@@ -11,42 +11,48 @@ using System.Threading.Tasks;
 
 namespace Core.Domain.Project.Queries.RestApi
 {
-    public class RestApiQueryHandler : IRequest<RestApiRequestDto>
+    public class RestApiQueryHandler : IRequest<RestApiResponseDto>
     {
-        public RestApiRequestDto property { get; set; }
-        public RestApiQueryHandler(RestApiRequestDto _property)
+        public RestApiResponseDto property { get; set; }
+        public RestApiQueryHandler(RestApiResponseDto _property)
         {
             property = _property;
         }
-        public class Handler : IRequestHandler<RestApiQueryHandler, RestApiRequestDto>
+        public class Handler : IRequestHandler<RestApiQueryHandler, RestApiResponseDto>
         {
 
-            public Task<RestApiRequestDto> Handle(RestApiQueryHandler request, CancellationToken cancellationToken)
+            public  Task<RestApiResponseDto> Handle(RestApiQueryHandler request, CancellationToken cancellationToken)
             {
                 var client = new RestClient(request.property.ApiURL);
-                client.AddDefaultHeader("Authorization", string.Format("Bearer {0}", request.property.Token));
                 var deserial = new JsonDeserializer();
-                var restApiResponseDto = new RestApiRequestDto();
+                var restApiResponseDto = new RestApiResponseDto();
+                
                 switch (request.property.HttpType)
                 {
                     case HttpType.Get:
-                        var req = new RestRequest(Method.GET);
-                        req.AddParameter("Authorization", "Bearer " + request.property.Token, ParameterType.HttpHeader);
-                        var context = client.ExecuteAsync(req).Result;
+                        var reqGet = new RestRequest(Method.GET);
+                        var contextGet = client.ExecuteAsync(reqGet).Result;
                         restApiResponseDto.ApiURL = request.property.ApiURL;
                         restApiResponseDto.HttpType = request.property.HttpType;
                         restApiResponseDto.Token = request.property.Token ?? null;
-                        restApiResponseDto.Request = context.Content;
-                        return Task.FromResult(restApiResponseDto);
-
-
-
+                        restApiResponseDto.Response = contextGet.Content;
+                        return Task.FromResult(restApiResponseDto);                                   
 
                     case HttpType.Post:
+                        var reqPost = new RestRequest(Method.POST);
+                        reqPost.RequestFormat = DataFormat.Json;
+                        reqPost.AddJsonBody(request.property.Response);
+                        var response = client.ExecuteAsync(reqPost);
                         return null;
                     case HttpType.Delete:
+                        var reqDelete = new RestRequest(Method.DELETE);
+                        var responseDelete = client.ExecuteAsync(reqDelete);
                         return null;
                     case HttpType.Put:
+                        var reqPut = new RestRequest(Method.PUT);
+                        reqPut.RequestFormat = DataFormat.Json;                    
+                        reqPut.AddJsonBody(request.property.Response);
+                        var responseUpdate = client.ExecuteAsync(reqPut);
                         return null;
                     default:
                         return null;

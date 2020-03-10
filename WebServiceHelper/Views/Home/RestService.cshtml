@@ -5,25 +5,32 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>Use this page to detail your site's privacy policy.</p>
-
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/bootstrap/js/bootstrap.min.js"></script>
+<link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
 
 <form action="RestService" method="post">
 
     @Html.DropDownListFor(o => o.HttpType, Enum.GetValues(typeof(Domain.Enums.HttpType)).Cast<Domain.Enums.HttpType>
-        ().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }),new { @class = "form-control" })
+        ().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }), new { @class = "form-control" })
     <div class="form-group">
         <label for="exampleInputEmail1">API Url</label>
-        @Html.TextBoxFor(x => x.ApiURL,new { @class = "form-control" })
-        
+        @Html.TextBoxFor(x => x.ApiURL, new { @class = "form-control" })
+
     </div>
 
 
     <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="button" id="target" class="btn btn-primary">Primary</button>
 </form>
 
 
 <div class="form-group">
     <label for="exampleFormControlTextarea1">Example textarea</label>
-     @Html.TextAreaFor(x=>x.Response,new { @class = "form-control" })
+    @Html.TextAreaFor(x => x.Response, new { @class = "form-control" })
 </div>
+<script src="~/highlighter/highlighter.js"></script>

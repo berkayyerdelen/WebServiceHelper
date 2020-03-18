@@ -42,8 +42,10 @@ namespace Core.Domain.Project.Queries.RestApi
                         var reqPost = new RestRequest(Method.POST);
                         reqPost.RequestFormat = DataFormat.Json;
                         reqPost.AddJsonBody(request.property.Response);
-                        var response = client.ExecuteAsync(reqPost);
-                        return null;
+                        var response = client.ExecuteAsync(reqPost).Result;
+                        restApiResponseDto.ApiURL = request.property.ApiURL;
+
+                        return Task.FromResult(restApiResponseDto);
                     case HttpType.Delete:
                         var reqDelete = new RestRequest(Method.DELETE);
                         var responseDelete = client.ExecuteAsync(reqDelete);

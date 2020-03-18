@@ -21,10 +21,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Context\" />
+    <Folder Include="Views\Partials\History\" />
     <Folder Include="wwwroot\bootstrap\" />
     <Folder Include="wwwroot\swagger\" />
   </ItemGroup>

@@ -35,15 +35,17 @@ namespace Core.Domain.Project.Queries.RestApi
                         restApiResponseDto.ApiURL = request.property.ApiURL;
                         restApiResponseDto.HttpType = request.property.HttpType;
                         restApiResponseDto.Token = request.property.Token ?? null;
-                        restApiResponseDto.Request = contextGet.Content;
+                        restApiResponseDto.Response = contextGet.Content;
                         return Task.FromResult(restApiResponseDto);                                   
 
                     case HttpType.Post:
                         var reqPost = new RestRequest(Method.POST);
                         reqPost.RequestFormat = DataFormat.Json;
-                        reqPost.AddJsonBody(request.property.Request);
-                        var response = client.ExecuteAsync(reqPost);
-                        return null;
+                        reqPost.AddJsonBody(request.property.Response);
+                        var response = client.ExecuteAsync(reqPost).Result;
+                        restApiResponseDto.ApiURL = request.property.ApiURL;
+
+                        return Task.FromResult(restApiResponseDto);
                     case HttpType.Delete:
                         var reqDelete = new RestRequest(Method.DELETE);
                         var responseDelete = client.ExecuteAsync(reqDelete);
@@ -51,7 +53,7 @@ namespace Core.Domain.Project.Queries.RestApi
                     case HttpType.Put:
                         var reqPut = new RestRequest(Method.PUT);
                         reqPut.RequestFormat = DataFormat.Json;                    
-                        reqPut.AddJsonBody(request.property.Request);
+                        reqPut.AddJsonBody(request.property.Response);
                         var responseUpdate = client.ExecuteAsync(reqPut);
                         return null;
                     default:

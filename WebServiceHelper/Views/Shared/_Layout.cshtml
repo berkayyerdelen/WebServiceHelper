@@ -29,23 +29,29 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    @RenderBody()
+   
 
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2020 - WebServiceHelper - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/bootstrap/js/bootstrap.min.js"></script>
-    <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    @*<script src="~/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="~/bootstrap/js/bootstrap.min.js"></script>
+        <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />*@
+
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

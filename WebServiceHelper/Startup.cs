@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
 using Core.Common.Mapper;
+using Core.Common.RestSharper;
 using Core.Domain.Project.Queries;
 using Core.Domain.Project.Queries.Project;
 using Core.Domain.Project.Queries.RestApi;
@@ -40,7 +41,7 @@ namespace WebServiceHelper
             services.AddScoped<IApplicationDbContext>(s => s.GetService<ApplicationDbContext>());
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configurationSection.Value));
             services.AddMediatR(Assembly.GetExecutingAssembly());
-
+            services.AddScoped<IRestApiHelper, RestApiHelper>();
             services.AddMediatR(typeof(GetProjectDetailsQuery));
             services.AddMediatR(typeof(RestApiQueryHandler));
             services.AddAutoMapper(typeof(Startup));

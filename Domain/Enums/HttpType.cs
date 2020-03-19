@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Domain.Enums
+﻿namespace Domain.Enums
 {
     public enum HttpType
     {
-        Get = 0,
-        Post = 2,
-        Delete = 3,
-        Put = 4
+        GET = 0,
+        POST = 2,
+        DELETE = 3,
+        PUT = 4
     }
 }

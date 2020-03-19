@@ -3,52 +3,95 @@
     ViewData["Title"] = "Rest Services";
 }
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/style.css" rel="stylesheet" />
 
 
-    <div class="container">
-        <h1>@ViewData["Title"]</h1>
+    <!-- Page Content  -->
+    <div id="content">
 
-        <p>Use this page to detail your site's privacy policy.</p>
-        <main role="main" class="pb-3">
-            <form action="RestService" method="post">
+        
+
+        <div class="container">
+
+            <main role="main" class="pb-3">
+                <form action="RestService" method="post">
+
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <div class="form-row">
+                                <div class="col-md-1 mb-1">
 
 
-                <div class="form-row">
-                    <div class="col-md-1 mb-1">
+                                    <select class="form-control" asp-for="HttpType" asp-items="Html.GetEnumSelectList<Domain.Enums.HttpType>()">
+                                        @*<option selected="selected" value="">Please select</option>*@
+                                    </select>
+                                    <span asp-validation-for="HttpType" class="text-danger" />
+                                </div>
+                                <div class="col-md-10 mb-1">
+                                    <input class="form-control" name="ApiURL" id="ApiURL" placeholder="Endpoint URL" asp-for="ApiURL" />
+                                </div>
+                                <div class="col-md-1 mb-1">
+                                    <button type="submit" id="btnSend" name="btnSend" class="btn btn-primary">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-md-12 mb-7">
 
+                                    @* @Html.TextAreaFor(x => x.Response, new { @class = "form-control" })*@
+                                    <textarea class="form-control" asp-for="Response" style="height: 231px; border-width:5px"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <div name="statusbar" id="statusbar" class="form-row">
+                                <h6> Proccess Status : <span class="badge badge-secondary">@Html.DisplayFor(x => x.ProccessStatus)</span></h6>
+                                <h6 style="margin-left:5px"> Finished In : <span class="badge badge-secondary">@Html.DisplayFor(x => x.ProccessTime)</span> Miliseconds </h6>
 
-                        <select class="form-control" asp-for="HttpType" asp-items="Html.GetEnumSelectList<Domain.Enums.HttpType>()">
-                            @*<option selected="selected" value="">Please select</option>*@
-                        </select>
-                        <span asp-validation-for="HttpType" class="text-danger" />
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-10 mb-1">
-                        <input class="form-control" name="ApiURL" id="ApiURL" asp-for="ApiURL" />
-                    </div>
-                    <div class="col-md-1 mb-1">
-                        <button type="submit" class="btn btn-primary">Send</button>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-12 mb-7">
-                        <label for="exampleFormControlTextarea1">Example textarea</label>
-                        @* @Html.TextAreaFor(x => x.Response, new { @class = "form-control" })*@
-                        <textarea class="form-control" asp-for="Response" style="height: 231px; border-width:5px"></textarea>
-                    </div>
-                </div>
 
 
 
-              
-                @* <button type="button" id="target" class="btn btn-primary">Primary</button>*@
-            </form>
-        </main>
+
+
+
+
+
+
+                    @* <button type="button" id="target" class="btn btn-primary">Primary</button>*@
+                </form>
+            </main>
+        </div>
     </div>
 
 
-<div>
-    <partial name="_HistoryRestRequest"/>
-</div>
 
 
-<script src="~/highlighter/highlighter.js"></script>
+@*<div>
+        <partial name="_HistoryRestRequest" />
+
+
+    </div>*@
+
+
+<script>
+   
+     $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    //$("#btnSend").click(function () {
+    //        $("#statusbar").toggle()
+    //});
+</script>
+@*<script src="~/highlighter/highlighter.js"></script>*@

@@ -6,6 +6,7 @@ using RestSharp;
 using RestSharp.Serialization.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,8 +17,8 @@ namespace Core.Domain.Project.Queries.RestApi
     public class RestApiQueryHandler : IRequest<RestApiResponseDto>
     {
         public RestApiResponseDto property { get; set; }
-       
-        public RestApiQueryHandler(RestApiResponseDto _property )
+
+        public RestApiQueryHandler(RestApiResponseDto _property)
         {
             property = _property;
         }
@@ -28,9 +29,11 @@ namespace Core.Domain.Project.Queries.RestApi
             {
                 _restApiHelper = restApiHelper;
             }
-            public  Task<RestApiResponseDto> Handle(RestApiQueryHandler request, CancellationToken cancellationToken)
+            public Task<RestApiResponseDto> Handle(RestApiQueryHandler request, CancellationToken cancellationToken)
             {
+                
                 var response = _restApiHelper.RestApiResponse(request);
+               
                 return response;
             }
         }

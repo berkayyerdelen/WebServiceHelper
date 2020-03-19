@@ -12,5 +12,7 @@ namespace Core.Domain.Project.Queries.RestApi.Dto
         public string Token { get; set; }
         public HttpType HttpType { get; set; }
         public string Response { get; set; }
+        public string ProccessStatus { get; set; }
+        public string ProccessTime { get; set; }
     }
 }

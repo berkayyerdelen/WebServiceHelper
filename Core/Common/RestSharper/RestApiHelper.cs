@@ -1,5 +1,5 @@
 ﻿using Core.Domain.Project.Queries.RestApi;
-using Core.Domain.Project.Queries.RestApi.Dto;
+using Core.Domain.Project.Queries.RestApi.RestApiWorker.Dto;
 using Domain.Enums;
 using RestSharp;
 using System;
@@ -7,14 +7,21 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Domain.Project.Queries.RestApi.RestApiWorker;
+using Core.Interface.EntityFramework;
+using Domain.Entities;
 using Utils.Converters;
 
 namespace Core.Common.RestSharper
 {
-    public class RestApiHelper : IRestApiHelper
+    public class RestApiHelper :IRestApiHelper
     {
-       
-       
+        private readonly IApplicationDbContext _context;
+
+        public RestApiHelper(IApplicationDbContext context)
+        {
+            _context = context;
+        }
         public Task<RestApiResponseDto> RestApiResponse(RestApiQueryHandler request)
         {
             
@@ -23,8 +30,6 @@ namespace Core.Common.RestSharper
             var reqType = new RestRequest(methodType);
             var restApiResponseDto = new RestApiResponseDto();
             Stopwatch sw = Stopwatch.StartNew();
-
-
             switch (request.property.HttpType)
             {
                 case HttpType.GET:
@@ -36,8 +41,11 @@ namespace Core.Common.RestSharper
                     restApiResponseDto.HttpType = request.property.HttpType;
                     restApiResponseDto.Token = request.property.Token ?? null;
                     restApiResponseDto.Response = contextGet.Content;
-                    restApiResponseDto.ProccessStatus = contextGet.StatusCode.ToString();
-                   
+                    restApiResponseDto.ProccessStatus = contextGet.StatusDescription;
+                    if (contextGet.IsSuccessful)
+                    {
+                     
+                    }
                     return Task.FromResult(restApiResponseDto);
 
                 case HttpType.POST:
@@ -62,5 +70,7 @@ namespace Core.Common.RestSharper
                     return null;
             }
         }
+
+       
     }
 }

@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Domain.Project.Queries.Project.ProjectDetails;
+using Core.Domain.Project.Queries.Project.ProjectNames;
 
 namespace WebServiceHelper.ViewModel
 {

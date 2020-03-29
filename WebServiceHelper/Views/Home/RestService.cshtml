@@ -1,4 +1,5 @@
-﻿@model Core.Domain.Project.Queries.RestApi.Dto.RestApiResponseDto
+﻿@using System.Linq
+@model ProjectRestApiViewModel
 @{
     ViewData["Title"] = "Rest Services";
 }
@@ -12,66 +13,80 @@
 <link href="~/css/style.css" rel="stylesheet" />
 
 
-    <!-- Page Content  -->
-    <div id="content">
-
-        
-
-        <div class="container">
-
-            <main role="main" class="pb-3">
-                <form action="RestService" method="post">
-
-                    <div class="card text-center">
-                        <div class="card-header">
-                            <div class="form-row">
-                                <div class="col-md-1 mb-1">
+<!-- Page Content  -->
+<div id="content">
 
 
-                                    <select class="form-control" asp-for="HttpType" asp-items="Html.GetEnumSelectList<Domain.Enums.HttpType>()">
-                                        @*<option selected="selected" value="">Please select</option>*@
-                                    </select>
-                                    <span asp-validation-for="HttpType" class="text-danger" />
-                                </div>
-                                <div class="col-md-10 mb-1">
-                                    <input class="form-control" name="ApiURL" id="ApiURL" placeholder="Endpoint URL" asp-for="ApiURL" />
-                                </div>
-                                <div class="col-md-1 mb-1">
-                                    <button type="submit" id="btnSend" name="btnSend" class="btn btn-primary">Send</button>
+
+    <div class="container">
+
+        <main role="main" class="pb-3">
+            <form action="RestService" method="post">
+
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="form-row">
+                            <div class="col-md-1 mb-1">
+                                <select class="custom-select mr-sm-2" asp-for="RestApiResponse.HttpType" asp-items="Html.GetEnumSelectList<Domain.Enums.HttpType>()">
+                                    @*<option selected="selected" value="">Please select</option>*@
+                                </select>
+                            </div>
+                            <div class="col-md-9 mb-1">
+                                <input class="form-control" name="ApiURL" id="ApiURL" placeholder="Endpoint URL" asp-for="RestApiResponse.ApiURL" />
+                            </div>
+                            <div class="col-md-1 mb-1">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="SaveDbButton">
+                                    <label class="custom-control-label" for="SaveDbButton"></label>
                                 </div>
                             </div>
+                            <div class="col-md-1 mb-1">
+                                <button type="submit" id="btnSend" name="btnSend" class="btn btn-primary">Send</button>
+                            </div>
+
+
                         </div>
+
+
+
+                    </div>
+                    <div class="card-footer" style="display:none" name="DbSection" id="DbSection">
+                        <div class="form-row">
+
+
+                            <div class="col-md-2 mb-1">
+                               
+                                <select class="form-control"  asp-for="Project" asp-items="@Model.Project" >
+                                   
+                                </select>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+                   
                         <div class="card-body">
+
                             <div class="form-row">
-                                <div class="col-md-12 mb-7">
+                            <div class="col-md-12">
 
-                                    @* @Html.TextAreaFor(x => x.Response, new { @class = "form-control" })*@
-                                    <textarea class="form-control" asp-for="Response" style="height: 231px; border-width:5px"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer text-muted">
-                            <div name="statusbar" id="statusbar" class="form-row">
-                                <h6> Proccess Status : <span class="badge badge-secondary">@Html.DisplayFor(x => x.ProccessStatus)</span></h6>
-                                <h6 style="margin-left:5px"> Finished In : <span class="badge badge-secondary">@Html.DisplayFor(x => x.ProccessTime)</span> Miliseconds </h6>
-
+                                @* @Html.TextAreaFor(x => x.Response, new { @class = "form-control" })*@
+                                <textarea class="form-control" asp-for="RestApiResponse.Response" style="height: 231px; border-width: 5px"></textarea>
                             </div>
                         </div>
                     </div>
+                    <div class="card-footer text-muted">
+                        <div name="statusbar" id="statusbar" class="form-row">
+                            <h6> Proccess Status : <span class="badge badge-secondary">@Html.DisplayFor(x => x.RestApiResponse.ProccessStatus)</span></h6>
+                            <h6 style="margin-left:5px"> Finished In : <span class="badge badge-secondary">@Html.DisplayFor(x => x.RestApiResponse.ProccessTime)</span> Miliseconds </h6>
 
-
-
-
-
-
-
-
-
-                    @* <button type="button" id="target" class="btn btn-primary">Primary</button>*@
-                </form>
-            </main>
-        </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </main>
     </div>
+</div>
 
 
 
@@ -84,12 +99,20 @@
 
 
 <script>
-   
-     $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
+
+    $(document).ready(function () {
+        //set initial state.
+        $('#SaveDbButton').val(this.checked);
+
+        $('#SaveDbButton').change(function () {
+            if (this.checked) {
+                $('#DbSection').show();
+                $('#SaveDbButton').val(this.checked);
+            } else {
+                $('#DbSection').hide();
+            }
         });
+    });
     //$("#btnSend").click(function () {
     //        $("#statusbar").toggle()
     //});

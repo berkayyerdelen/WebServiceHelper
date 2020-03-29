@@ -3,7 +3,7 @@ using AutoMapper;
 using Domain.Entities;
 using Domain.Enums;
 
-namespace Core.Domain.Project.Queries.Project
+namespace Core.Domain.Project.Queries.Project.ProjectDetails
 {
     public class GetProjectDetailDto 
     {

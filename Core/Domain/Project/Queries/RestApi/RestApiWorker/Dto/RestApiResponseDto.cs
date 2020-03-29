@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Domain.Enums;
 
-namespace Core.Domain.Project.Queries.RestApi.Dto
+namespace Core.Domain.Project.Queries.RestApi.RestApiWorker.Dto
 {
     public class RestApiResponseDto
     {

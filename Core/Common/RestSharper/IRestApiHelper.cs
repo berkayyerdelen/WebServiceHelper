@@ -1,6 +1,7 @@
 ﻿using Core.Domain.Project.Queries.RestApi;
-using Core.Domain.Project.Queries.RestApi.Dto;
 using System.Threading.Tasks;
+using Core.Domain.Project.Queries.RestApi.RestApiWorker;
+using Core.Domain.Project.Queries.RestApi.RestApiWorker.Dto;
 
 namespace Core.Common.RestSharper
 {

@@ -6,9 +6,10 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using Core.Domain.Project.Queries.Project.ProjectDetails;
 using Microsoft.EntityFrameworkCore;
 
-namespace Core.Domain.Project.Queries.Project
+namespace Core.Domain.Project.Queries.Project.ProjectDetails
 {
     public class GetProjectDetailsQuery:IRequest<List<GetProjectDetailDto>>
     {
@@ -25,11 +26,11 @@ namespace Core.Domain.Project.Queries.Project
             public async Task<List<GetProjectDetailDto>> Handle(GetProjectDetailsQuery request, CancellationToken cancellationToken)
             {
 
-                var projectDetails = await _context.Set<global::Domain.Entities.Project>().
+                var source = await _context.Set<global::Domain.Entities.Project>().
                 Include(x => x.Webapps).ThenInclude(c=>c.WebAppDetails)
                 .Select(x=>_mapper.Map<GetProjectDetailDto>(x))
                 .ToListAsync(cancellationToken);               
-                return projectDetails;
+                return source;
                        
                
             }

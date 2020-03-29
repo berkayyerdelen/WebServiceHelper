@@ -1,5 +1,5 @@
 ﻿using Core.Common.RestSharper;
-using Core.Domain.Project.Queries.RestApi.Dto;
+using Core.Domain.Project.Queries.RestApi.RestApiWorker.Dto;
 using Domain.Enums;
 using MediatR;
 using RestSharp;
@@ -12,7 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Utils.Converters;
 
-namespace Core.Domain.Project.Queries.RestApi
+namespace Core.Domain.Project.Queries.RestApi.RestApiWorker
 {
     public class RestApiQueryHandler : IRequest<RestApiResponseDto>
     {
@@ -31,9 +31,7 @@ namespace Core.Domain.Project.Queries.RestApi
             }
             public Task<RestApiResponseDto> Handle(RestApiQueryHandler request, CancellationToken cancellationToken)
             {
-                
                 var response = _restApiHelper.RestApiResponse(request);
-               
                 return response;
             }
         }

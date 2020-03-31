@@ -12,6 +12,7 @@ using Core.Domain.Project.Queries.Project.ProjectNames;
 using Core.Domain.Project.Queries.RestApi;
 using Core.Domain.Project.Queries.RestApi.RestApiWorker;
 using Core.Domain.Project.Queries.RestApi.RestApiWorker.Dto;
+using Core.Domain.Project.Queries.WebApps;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -38,6 +39,12 @@ namespace WebServiceHelper.Controllers
                 projectViewModel = projectdetails
             });
         }
+
+        #region MyRegion
+
+
+
+
         [HttpGet]
         public IActionResult RestService()
         {
@@ -69,6 +76,13 @@ namespace WebServiceHelper.Controllers
             });
         }
 
+        public JsonResult GetWebApps(int productId)
+        {
+            var source = _mediator.Send(new GetWebAppQuery(productId));
+            return Json(source);
+        }
+
+        #endregion
 
     }
 }

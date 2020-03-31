@@ -11,7 +11,58 @@
 <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 <link href="~/css/style.css" rel="stylesheet" />
+<style>
+    #Dbtransaction {
+        padding: 0 20px
+    }
 
+
+
+        #Dbtransaction > input {
+            display: none;
+        }
+
+        #Dbtransaction i {
+            display: inline-block;
+            float: right;
+            padding: 2px;
+            width: 40px;
+            height: 20px;
+            border-radius: 13px;
+            vertical-align: middle;
+            -webkit-transition: .25s .09s;
+            transition: .25s .09s;
+            position: relative;
+            background: #d8d9db;
+            box-sizing: initial;
+        }
+
+            #Dbtransaction i:after {
+                content: " ";
+                display: block;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: #fff;
+                position: absolute;
+                left: 2px;
+                -webkit-transition: .25s;
+                transition: .25s;
+            }
+
+        #Dbtransaction > input:checked + i {
+            background: #0069d9;
+        }
+
+            #Dbtransaction > input:checked + i:after {
+                -webkit-transform: translateX(20px);
+                transform: translateX(20px);
+            }
+
+        #Dbtransaction:hover {
+            cursor: pointer;
+        }
+</style>
 
 <!-- Page Content  -->
 <div id="content">
@@ -34,11 +85,12 @@
                             <div class="col-md-9 mb-1">
                                 <input class="form-control" name="ApiURL" id="ApiURL" placeholder="Endpoint URL" asp-for="RestApiResponse.ApiURL" />
                             </div>
-                            <div class="col-md-1 mb-1">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="SaveDbButton">
-                                    <label class="custom-control-label" for="SaveDbButton"></label>
-                                </div>
+                            <div class="col-md-1 mb-1" style="padding-top: 5px;">
+
+                                <label id="Dbtransaction">
+
+                                    <input type="checkbox" id="SaveDbButton"><i></i>
+                                </label>
                             </div>
                             <div class="col-md-1 mb-1">
                                 <button type="submit" id="btnSend" name="btnSend" class="btn btn-primary">Send</button>
@@ -46,28 +98,37 @@
 
 
                         </div>
-
-
-
                     </div>
-                    <div class="card-footer" style="display:none" name="DbSection" id="DbSection">
+                    <div class="card-footer" style="display: none" name="DbSection" id="DbSection">
+
+
                         <div class="form-row">
-
-
                             <div class="col-md-2 mb-1">
-                               
-                                <select class="form-control"  asp-for="Project" asp-items="@Model.Project" >
-                                   
-                                </select>
+                                @*<select multiple="multiple" class="custom-select mr-sm-2" asp-items="@Model.Project">
+                                    </select>*@
+                                @Html.DropDownListFor(x => x.Project, Model.Project, new { @class = "form-control" })
+
+                                </div>
+                            <div class="col-md-2 mb-1">
+                               <select class="form-control" id ="WebAppId" name ="WebAppId"  asp-items="@(new SelectList("WebAppId","WebAppName"))"></select>
+
                             </div>
-                            
+                            <div class="col-md-1 mb-1" style="padding-top: 5px;">
+
+
+                            </div>
+
+
 
                         </div>
-                    </div>
-                   
-                        <div class="card-body">
 
-                            <div class="form-row">
+
+
+
+                    </div>
+                    <div class="card-body">
+
+                        <div class="form-row">
                             <div class="col-md-12">
 
                                 @* @Html.TextAreaFor(x => x.Response, new { @class = "form-control" })*@
@@ -100,21 +161,24 @@
 
 <script>
 
-    $(document).ready(function () {
+    $(function () {
         //set initial state.
-        $('#SaveDbButton').val(this.checked);
+
 
         $('#SaveDbButton').change(function () {
             if (this.checked) {
+
                 $('#DbSection').show();
-                $('#SaveDbButton').val(this.checked);
             } else {
+
                 $('#DbSection').hide();
             }
         });
     });
-    //$("#btnSend").click(function () {
-    //        $("#statusbar").toggle()
-    //});
+
+
+
+
+
 </script>
 @*<script src="~/highlighter/highlighter.js"></script>*@

@@ -40,7 +40,7 @@ namespace WebServiceHelper.Controllers
             });
         }
 
-        #region MyRegion
+        #region RestService
 
 
 
@@ -78,7 +78,7 @@ namespace WebServiceHelper.Controllers
 
         public JsonResult GetWebApps(int productId)
         {
-            var source = _mediator.Send(new GetWebAppQuery(productId));
+            var source = _mediator.Send(new GetWebAppQuery(productId)).Result;
             return Json(source);
         }
 

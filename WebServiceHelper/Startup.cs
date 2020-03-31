@@ -38,8 +38,10 @@ namespace WebServiceHelper
         public void ConfigureServices(IServiceCollection services)
         {
             var configurationSection = Configuration.GetSection("ConnectionStrings:DefaultConnection");
-           
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+   
+
             services.AddScoped<IApplicationDbContext>(s => s.GetService<ApplicationDbContext>());
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configurationSection.Value));
             services.AddMediatR(Assembly.GetExecutingAssembly());

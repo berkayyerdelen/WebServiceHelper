@@ -108,9 +108,9 @@
                                     </select>*@
                                 @Html.DropDownListFor(x => x.Project, Model.Project, new { @class = "form-control" })
 
-                                </div>
+                            </div>
                             <div class="col-md-2 mb-1">
-                               <select class="form-control" id ="WebAppId" name ="WebAppId"  asp-items="@(new SelectList("WebAppId","WebAppName"))"></select>
+                                <select class="form-control" id="WebApp" name="WebApp" asp-items="@(new SelectList(string.Empty,"WebAppId","WebAppName"))"></select>
 
                             </div>
                             <div class="col-md-1 mb-1" style="padding-top: 5px;">
@@ -164,6 +164,10 @@
     $(function () {
         //set initial state.
 
+        
+            
+            
+        
 
         $('#SaveDbButton').change(function () {
             if (this.checked) {
@@ -173,6 +177,20 @@
 
                 $('#DbSection').hide();
             }
+        });
+
+        
+        $('#Project').change(function () {
+            var selectedProject = $("#Project").children("option:selected").val();
+            var url = '@Url.Content("~/")' + "Home/GetWebApps";
+            $.getJSON(url, { productId: selectedProject }, function (data) {
+                var items = "";
+                $('#WebApp').empty();
+                $.each(data, function (i, webapp) {
+                    items += "<option value='" + webapp.value + "'>" + webapp.text + "</option>";
+                });
+                $('#WebApp').html(items);
+            })
         });
     });
 

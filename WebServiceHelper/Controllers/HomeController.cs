@@ -69,7 +69,7 @@ namespace WebServiceHelper.Controllers
 
             });
         }
-
+        [HttpPost]
         public async Task<JsonResult> GetWebApps(WebAppRequest request)
         {
             var source = await _mediator.Send(request,CancellationToken.None);

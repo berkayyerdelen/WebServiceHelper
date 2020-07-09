@@ -104,9 +104,9 @@
 
                         <div class="form-row">
                             <div class="col-md-2 mb-1">
-                                <select multiple="multiple" class="custom-select mr-sm-2" asp-items="@Model.Project">
-                                    </select>
-                             @*   @Html.DropDownListFor(x => x.Project, Model.Project, new { @class = "form-control" })*@
+                                <select multiple="multiple" class="custom-select mr-sm-2" name="Project" id="Project" asp-items="@Model.Project">
+                                </select>
+                                @*   @Html.DropDownListFor(x => x.Project, Model.Project, new { @class = "form-control" })*@
 
                             </div>
                             <div class="col-md-2 mb-1">
@@ -161,38 +161,48 @@
 
 <script>
 
-    $(function () {
-        //set initial state.
 
-        
-            
-            
-        
+    $('#SaveDbButton').change(function() {
+        if (this.checked) {
 
-        $('#SaveDbButton').change(function () {
-            if (this.checked) {
+            $('#DbSection').show();
+        } else {
 
-                $('#DbSection').show();
-            } else {
+            $('#DbSection').hide();
+        }
+    });
 
-                $('#DbSection').hide();
-            }
-        });
-
-        
-        $('#Project').change(function () {
+        $('#Project').click(function () {
             var selectedProject = $("#Project").children("option:selected").val();
             var url = '@Url.Content("~/")' + "Home/GetWebApps";
-            $.getJSON(url, { productId: selectedProject }, function (data) {
-                var items = "";
-                $('#WebApp').empty();
-                $.each(data, function (i, webapp) {
-                    items += "<option value='" + webapp.value + "'>" + webapp.text + "</option>";
-                });
-                $('#WebApp').html(items);
-            })
+            console.log(selectedProject);
+            var webAppRequest = {
+                "WebAppId": selectedProject
+            };
+            console.log
+                (url);
+           
+
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: JSON.stringify(webAppRequest),
+                dataType: 'json',
+                contentType: "application/json",
+                success: function(data) {
+                    var items = "";
+                    $('#WebApp').empty();
+                    $.each(data,
+                        function(i, webapp) {
+                            items += "<option value='" + webapp.value + "'>" + webapp.text + "</option>";
+                        });
+                    $('#WebApp').html(items);
+                }
+                
+            });
+
         });
-    });
 
 
 

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Core.Domain.Project.Queries.Project.ProjectDetails;
+using Core.Domain.Project.Queries.Project.ProjectDetails.Dto;
 using Core.Domain.Project.Queries.Project.ProjectNames;
 using Core.Domain.Project.Queries.WebApps;
 
@@ -16,9 +17,9 @@ namespace Core.Common.Mapper
     {
         public MappingProfile()
         {
-
-            CreateMap<Project, GetProjectDetailDto>();
-            CreateMap<WebApps, WebAppsDto>();
+            //ProjectDetails
+            CreateMap<Project, ProjectDto>();
+            CreateMap<WebApps, WebAppDto>();
             CreateMap<WebAppDetails, WebbAppDetailsDto>();
 
 

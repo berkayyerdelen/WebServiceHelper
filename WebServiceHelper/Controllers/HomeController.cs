@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Core.Common.Attributes;
-using Core.Domain.Project.Queries;
-using Core.Domain.Project.Queries.Project;
 using Core.Domain.Project.Queries.Project.ProjectDetails;
+using Core.Domain.Project.Queries.Project.ProjectDetails.Dto;
 using Core.Domain.Project.Queries.Project.ProjectNames;
-using Core.Domain.Project.Queries.RestApi;
-using Core.Domain.Project.Queries.RestApi.RestApiWorker;
 using Core.Domain.Project.Queries.RestApi.RestApiWorker.Dto;
 using Core.Domain.Project.Queries.WebApps;
 using MediatR;
@@ -30,9 +23,9 @@ namespace WebServiceHelper.Controllers
             => (_logger, _mediator) = (logger, mediator);
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var projectdetails = _mediator.Send(new GetProjectDetailsQuery(), CancellationToken.None).Result;
+            var projectdetails = await _mediator.Send(new GetProjectDetailsRequest(), CancellationToken.None);
 
             return View("Index", new ProjectViewModel()
             {
@@ -66,7 +59,7 @@ namespace WebServiceHelper.Controllers
         [HttpPost]
         public async Task<IActionResult> RestService(RestApiRequestDto request)
         {
-            
+
             var query = await _mediator.Send(request, CancellationToken.None);
 
             return View("RestService", new ProjectRestApiViewModel()
@@ -76,9 +69,9 @@ namespace WebServiceHelper.Controllers
             });
         }
 
-        public JsonResult GetWebApps(int productId)
+        public async Task<JsonResult> GetWebApps(int productId)
         {
-            var source = _mediator.Send(new GetWebAppQuery(productId)).Result;
+            var source = await _mediator.Send(new GetWebAppQuery(productId));
             return Json(source);
         }
 

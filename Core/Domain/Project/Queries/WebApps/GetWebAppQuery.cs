@@ -29,9 +29,9 @@ namespace Core.Domain.Project.Queries.WebApps
                 _mapper = mapper;
             }
 
-            public Task<List<WebAppsDropdownDto>> Handle(GetWebAppQuery request, CancellationToken cancellationToken)
+            public async  Task<List<WebAppsDropdownDto>> Handle(GetWebAppQuery request, CancellationToken cancellationToken)
             {
-                var source = _context.Set<global::Domain.Entities.WebApps>().Where(x => x.ProjectId == request.webAppId).Select(p=>_mapper.Map<WebAppsDropdownDto>(p))
+                var source = await _context.Set<global::Domain.Entities.WebApps>().Where(x => x.ProjectId == request.webAppId).Select(p=>_mapper.Map<WebAppsDropdownDto>(p))
                     .ToListAsync(cancellationToken);
                 return source;
             }

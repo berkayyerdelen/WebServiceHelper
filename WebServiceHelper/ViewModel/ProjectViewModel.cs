@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Domain.Project.Queries.Project.ProjectDetails;
+using Core.Domain.Project.Queries.Project.ProjectDetails.Dto;
 using Core.Domain.Project.Queries.Project.ProjectNames;
 
 namespace WebServiceHelper.ViewModel
 {
     public class ProjectViewModel
     {
-        public List<GetProjectDetailDto> projectViewModel { get; set; }
+        public List<ProjectDto> projectViewModel { get; set; }
     }
 }

@@ -1,30 +1,33 @@
-﻿using Core.Domain.Project.Queries.RestApi;
+﻿
 using Core.Domain.Project.Queries.RestApi.RestApiWorker.Dto;
 using Domain.Enums;
+using MediatR;
 using RestSharp;
+using RestSharp.Serialization.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using Core.Domain.Project.Queries.RestApi.RestApiWorker;
-using Core.Interface.EntityFramework;
-using Domain.Entities;
 using Utils.Converters;
 
-namespace Core.Common.RestSharper
+namespace Core.Domain.Project.Queries.RestApi.RestApiWorker
 {
-    public class RestApiHelper :IRestApiHelper
+    public class RestApiHandler : IRequestHandler<RestApiRequestDto, RestApiResponseDto>
     {
-        private readonly IApplicationDbContext _context;
-
-        public RestApiHelper(IApplicationDbContext context)
+        
+        public async Task<RestApiResponseDto> Handle(RestApiRequestDto request, CancellationToken cancellationToken)
         {
-            _context = context;
+            var response = await RestApiResponse(request);
+            return response;
         }
-        public Task<RestApiResponseDto> RestApiResponse(RestApiRequestDto request)
+
+        #region Helper
+
+        private Task<RestApiResponseDto> RestApiResponse(RestApiRequestDto request)
         {
-            
+
             var methodType = EnumConverter.ConvertTo<HttpType, Method>(request.HttpType);
             var client = new RestClient(request.ApiUrl);
             var reqType = new RestRequest(methodType);
@@ -33,7 +36,7 @@ namespace Core.Common.RestSharper
             switch (request.HttpType)
             {
                 case HttpType.GET:
-                    
+
                     var contextGet = client.ExecuteAsync(reqType).Result;
                     sw.Stop();
                     restApiResponseDto.ProccessTime = sw.ElapsedMilliseconds.ToString();
@@ -44,7 +47,7 @@ namespace Core.Common.RestSharper
                     restApiResponseDto.ProccessStatus = contextGet.StatusDescription;
                     if (contextGet.IsSuccessful)
                     {
-                     
+
                     }
                     return Task.FromResult(restApiResponseDto);
 
@@ -53,16 +56,16 @@ namespace Core.Common.RestSharper
                     //reqType.RequestFormat = DataFormat.Json;
                     //reqType.AddJsonBody(request.Response);
                     //var response = client.ExecuteAsync(reqType).Result;
-                    
+
                     //restApiResponseDto.ApiURL = request.ApiUrl;
 
                     return Task.FromResult(restApiResponseDto);
                 case HttpType.DELETE:
-                   
+
                     var responseDelete = client.ExecuteAsync(reqType);
                     return null;
                 case HttpType.PUT:
-                   
+
                     //reqType.AddJsonBody(request.Response);
                     //var responseUpdate = client.ExecuteAsync(reqType);
                     return null;
@@ -71,6 +74,8 @@ namespace Core.Common.RestSharper
             }
         }
 
-       
+        #endregion
+
     }
+
 }

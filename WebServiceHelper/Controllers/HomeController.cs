@@ -6,6 +6,7 @@ using Core.Domain.Project.Queries.Project.ProjectDetails.Dto;
 using Core.Domain.Project.Queries.Project.ProjectNames;
 using Core.Domain.Project.Queries.RestApi.RestApiWorker.Dto;
 using Core.Domain.Project.Queries.WebApps;
+using Core.Domain.Project.Queries.WebApps.Dto;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -69,9 +70,9 @@ namespace WebServiceHelper.Controllers
             });
         }
 
-        public async Task<JsonResult> GetWebApps(int productId)
+        public async Task<JsonResult> GetWebApps(WebAppRequest request)
         {
-            var source = await _mediator.Send(new GetWebAppQuery(productId));
+            var source = await _mediator.Send(request,CancellationToken.None);
             return Json(source);
         }
 

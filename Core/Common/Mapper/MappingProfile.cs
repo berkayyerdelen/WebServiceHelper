@@ -9,6 +9,7 @@ using Core.Domain.Project.Queries.Project.ProjectDetails;
 using Core.Domain.Project.Queries.Project.ProjectDetails.Dto;
 using Core.Domain.Project.Queries.Project.ProjectNames;
 using Core.Domain.Project.Queries.WebApps;
+using Core.Domain.Project.Queries.WebApps.Dto;
 
 
 namespace Core.Common.Mapper
@@ -26,7 +27,7 @@ namespace Core.Common.Mapper
             CreateMap<Project, ProjectsDto>().ForMember(x => x.ProjectId, c => c.MapFrom(v => v.Id)).ForMember(x => x.ProjectName, c => c.MapFrom(v => v.ProjectName));
             //CreateMap<WebApps, ProjectsWebAppsDto>();
 
-            CreateMap<WebApps, WebAppsDropdownDto>().ForMember(x => x.WebAppId, c => c.MapFrom(v => v.Id))
+            CreateMap<WebApps, WebAppDropDownDto>().ForMember(x => x.WebAppId, c => c.MapFrom(v => v.Id))
                 .ForMember(x => x.WebAppName, c => c.MapFrom(v => v.WebAppUrl));
         }
     }

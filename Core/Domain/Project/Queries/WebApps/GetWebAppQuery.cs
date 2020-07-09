@@ -5,36 +5,30 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using Core.Domain.Project.Queries.WebApps.Dto;
 using Core.Interface.EntityFramework;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Domain.Project.Queries.WebApps
 {
-    public class GetWebAppQuery:IRequest<List<WebAppsDropdownDto>>
+    public class GetWebAppQuery:IRequestHandler<WebAppRequest,List<WebAppDropDownDto>>
     {
-        public int webAppId { get; set; }
+        private readonly IApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public GetWebAppQuery(int webAppId)
+        public GetWebAppQuery(IApplicationDbContext context, IMapper mapper)
         {
-            this.webAppId = webAppId;
+            _context = context;
+            _mapper = mapper;
         }
-        public class Handler : IRequestHandler<GetWebAppQuery, List<WebAppsDropdownDto>>
+        
+        public async  Task<List<WebAppDropDownDto>> Handle(WebAppRequest request, CancellationToken cancellationToken)
         {
-            private readonly IApplicationDbContext _context;
-            private readonly IMapper _mapper;
-            public Handler(IApplicationDbContext context, IMapper mapper)
-            {
-                _context = context;
-                _mapper = mapper;
-            }
-
-            public async  Task<List<WebAppsDropdownDto>> Handle(GetWebAppQuery request, CancellationToken cancellationToken)
-            {
-                var source = await _context.Set<global::Domain.Entities.WebApps>().Where(x => x.ProjectId == request.webAppId).Select(p=>_mapper.Map<WebAppsDropdownDto>(p))
-                    .ToListAsync(cancellationToken);
-                return source;
-            }
+            var source = await _context.Set<global::Domain.Entities.WebApps>()
+                .Where(x => x.ProjectId == request.WebAppId).Select(p => _mapper.Map<WebAppDropDownDto>(p))
+                .ToListAsync(cancellationToken);
+            return source;
         }
     }
 }

@@ -104,9 +104,9 @@
 
                         <div class="form-row">
                             <div class="col-md-2 mb-1">
-                                @*<select multiple="multiple" class="custom-select mr-sm-2" asp-items="@Model.Project">
-                                    </select>*@
-                                @Html.DropDownListFor(x => x.Project, Model.Project, new { @class = "form-control" })
+                                <select multiple="multiple" class="custom-select mr-sm-2" asp-items="@Model.Project">
+                                    </select>
+                             @*   @Html.DropDownListFor(x => x.Project, Model.Project, new { @class = "form-control" })*@
 
                             </div>
                             <div class="col-md-2 mb-1">

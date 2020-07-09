@@ -64,10 +64,10 @@ namespace WebServiceHelper.Controllers
         }
 
         [HttpPost]
-        public IActionResult RestService(RestApiResponseDto request)
+        public async Task<IActionResult> RestService(RestApiRequestDto request)
         {
-            ModelState.Clear();
-            var query = _mediator.Send(new RestApiQueryHandler(request), CancellationToken.None).Result;
+            
+            var query = await _mediator.Send(request, CancellationToken.None);
 
             return View("RestService", new ProjectRestApiViewModel()
             {

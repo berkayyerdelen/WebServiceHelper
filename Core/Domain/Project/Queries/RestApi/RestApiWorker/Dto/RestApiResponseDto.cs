@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Domain.Enums;
+using MediatR;
 
 namespace Core.Domain.Project.Queries.RestApi.RestApiWorker.Dto
 {

@@ -56,7 +56,6 @@ namespace WebServiceHelper
 
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
-            
             services.AddMemoryCache();
 
         }

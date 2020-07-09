@@ -7,6 +7,6 @@ namespace Core.Common.RestSharper
 {
     public interface IRestApiHelper
     {
-        Task<RestApiResponseDto> RestApiResponse(RestApiQueryHandler request);
+        Task<RestApiResponseDto> RestApiResponse(RestApiRequestDto request);
     }
 }

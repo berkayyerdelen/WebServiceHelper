@@ -14,26 +14,18 @@ using Utils.Converters;
 
 namespace Core.Domain.Project.Queries.RestApi.RestApiWorker
 {
-    public class RestApiQueryHandler : IRequest<RestApiResponseDto>
+    public class RestApiQueryHandler : IRequestHandler<RestApiRequestDto, RestApiResponseDto>
     {
-        public RestApiResponseDto property { get; set; }
-
-        public RestApiQueryHandler(RestApiResponseDto _property)
+        private readonly IRestApiHelper _restApiHelper;
+        public RestApiQueryHandler(IRestApiHelper restApiHelper)
         {
-            property = _property;
+            _restApiHelper = restApiHelper;
         }
-        public class Handler : IRequestHandler<RestApiQueryHandler, RestApiResponseDto>
+
+        public async Task<RestApiResponseDto> Handle(RestApiRequestDto request, CancellationToken cancellationToken)
         {
-            private readonly IRestApiHelper _restApiHelper;
-            public Handler(IRestApiHelper restApiHelper)
-            {
-                _restApiHelper = restApiHelper;
-            }
-            public Task<RestApiResponseDto> Handle(RestApiQueryHandler request, CancellationToken cancellationToken)
-            {
-                var response = _restApiHelper.RestApiResponse(request);
-                return response;
-            }
+            var response = await _restApiHelper.RestApiResponse(request);
+            return response;
         }
     }
 }

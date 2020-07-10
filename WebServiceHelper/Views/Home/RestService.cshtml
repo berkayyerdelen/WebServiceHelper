@@ -177,7 +177,7 @@
             var url = '@Url.Content("~/")' + "Home/GetWebApps";
             console.log(selectedProject);
             var webAppRequest = {
-                "WebAppId": selectedProject
+                "WebAppId": parseInt(selectedProject)
             };
             console.log
                 (url);

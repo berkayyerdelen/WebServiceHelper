@@ -110,7 +110,7 @@
 
                             </div>
                             <div class="col-md-2 mb-1">
-                                <select class="form-control" id="WebApp" name="WebApp" asp-items="@(new SelectList(string.Empty,"WebAppId","WebAppName"))"></select>
+                                <select class="form-control" id="WebApp" name="WebApp"></select>
 
                             </div>
                             <div class="col-md-1 mb-1" style="padding-top: 5px;">
@@ -174,15 +174,11 @@
 
         $('#Project').click(function () {
             var selectedProject = $("#Project").children("option:selected").val();
-            var url = '@Url.Content("~/")' + "Home/GetWebApps";
-            console.log(selectedProject);
+            var url = '@Url.Content("~/")' + "Home/GetWebApps"
             var webAppRequest = {
                 "WebAppId": parseInt(selectedProject)
             };
-            console.log
-                (url);
            
-
 
             $.ajax({
                 type: 'POST',
@@ -194,8 +190,8 @@
                     var items = "";
                     $('#WebApp').empty();
                     $.each(data,
-                        function(i, webapp) {
-                            items += "<option value='" + webapp.value + "'>" + webapp.text + "</option>";
+                        function (i, webapp) {
+                            items += "<option value='" + webapp.webAppName + "'>" + webapp.webAppName + "</option>";
                         });
                     $('#WebApp').html(items);
                 }
@@ -209,4 +205,4 @@
 
 
 </script>
-@*<script src="~/highlighter/highlighter.js"></script>*@
+<script src="~/highlighter/highlighter.js"></script>

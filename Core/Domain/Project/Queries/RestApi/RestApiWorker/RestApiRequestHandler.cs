@@ -27,13 +27,13 @@ namespace Core.Domain.Project.Queries.RestApi.RestApiWorker
 
         private Task<RestApiResponseDto> RestApiResponse(RestApiRequestDto request)
         {
-
-            var methodType = EnumConverter.ConvertTo<HttpType, Method>(request.HttpType);
+            var httpType = (HttpType)request.HttpType;
+            var methodType = EnumConverter.ConvertTo<HttpType, Method>(httpType);
             var client = new RestClient(request.ApiUrl);
             var reqType = new RestRequest(methodType);
             var restApiResponseDto = new RestApiResponseDto();
             Stopwatch sw = Stopwatch.StartNew();
-            switch (request.HttpType)
+            switch (httpType)
             {
                 case HttpType.GET:
 
@@ -41,7 +41,7 @@ namespace Core.Domain.Project.Queries.RestApi.RestApiWorker
                     sw.Stop();
                     restApiResponseDto.ProccessTime = sw.ElapsedMilliseconds.ToString();
                     restApiResponseDto.ApiURL = request.ApiUrl;
-                    restApiResponseDto.HttpType = request.HttpType;
+                    restApiResponseDto.HttpType = httpType;
                     restApiResponseDto.Token = request.Token ?? null;
                     restApiResponseDto.Response = contextGet.Content;
                     restApiResponseDto.ProccessStatus = contextGet.StatusDescription;

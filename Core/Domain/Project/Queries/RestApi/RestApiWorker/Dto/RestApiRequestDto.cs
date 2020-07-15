@@ -7,7 +7,7 @@ namespace Core.Domain.Project.Queries.RestApi.RestApiWorker.Dto
     {
         public string ApiUrl { get; set; }
         public string Token { get; set; }
-        public HttpType HttpType { get; set; }
+        public int HttpType { get; set; }
 
     }
 }

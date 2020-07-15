@@ -143,13 +143,14 @@
 
                         </div>
                     </div>
+                    
+                    <button type="button" id="Process" name="Process" class="btn btn-primary">Send</button>
+
                 </div>
             </form>
         </main>
     </div>
 </div>
-
-
 
 
 @*<div>
@@ -161,24 +162,24 @@
 
 <script>
 
-
+    var changeButton = 0;
     $('#SaveDbButton').change(function() {
         if (this.checked) {
-
+            changeButton = 1;
             $('#DbSection').show();
         } else {
-
+            changeButton = 0;
             $('#DbSection').hide();
         }
     });
 
         $('#Project').click(function () {
             var selectedProject = $("#Project").children("option:selected").val();
-            var url = '@Url.Content("~/")' + "Home/GetWebApps"
+            var url = '@Url.Content("~/")' + "Home/GetWebApps";
             var webAppRequest = {
                 "WebAppId": parseInt(selectedProject)
             };
-           
+
 
             $.ajax({
                 type: 'POST',
@@ -195,14 +196,37 @@
                         });
                     $('#WebApp').html(items);
                 }
-                
+
+            });
+
+        });
+    debugger;
+        $('#Process').click(function () {
+            var selectedProject = $('#RestApiResponse_HttpType').val();
+            var endPointUrl = $('#ApiURL').val();
+            var checkedButton = changeButton;
+            var url = '@Url.Content("~/")' + "Home/RestService";
+            var restApiRequestDto = {
+                "ApiUrl": endPointUrl,
+                "Token": "",
+                "HttpType": parseInt(selectedProject)
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: JSON.stringify(restApiRequestDto),
+                dataType: 'json',
+                contentType: "application/json",
+                success: function(data) {
+                   
+                }
+
             });
 
         });
 
 
 
-
-
 </script>
-<script src="~/highlighter/highlighter.js"></script>
+@*<script src="~/highlighter/highlighter.js"></script>*@
